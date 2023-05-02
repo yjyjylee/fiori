@@ -1,0 +1,23 @@
+<mvc:View controllerName="zprojectteste1703.controller.HelloPanel"
+xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+xmlns="sap.m">
+<Panel headerText="Header" class="sapuiResponsiveMargin" width="auto">
+    <content>
+        <Button text="Hello Button" press="onHelloPress"></Button>
+    
+        <!-- 방법2
+        <Dialog id="helloDialog" title="Hello Title">
+            <content>
+                <Text text="Hello Dialog Text"></Text>
+            </content>
+
+            <endButton>
+                <Button text="close" press="onClose">
+                </Button>
+            </endButton>
+        </Dialog> -->
+        <Input value="Input Value"></Input>
+    </content>
+</Panel>
+
+</mvc:View> 

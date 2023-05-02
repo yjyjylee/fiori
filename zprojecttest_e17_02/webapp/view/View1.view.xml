@@ -1,0 +1,28 @@
+<mvc:View controllerName="c05.zprojectteste1702.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <l:VerticalLayout id="_IDGenVerticalLayout1">
+                <Input id="idInput" submit="onEnter"></Input>
+                <Text id="idText"/>
+            </l:VerticalLayout>
+            <l:VerticalLayout >
+                <Text text= 'Hello World'> </Text>
+                <Input id="idInput1" placeholder="입력하세요" ></Input>
+                <Select id="idSelect" width="100%">
+                    <items>
+                        <core:Item key="plus" text="+"/>
+                        <core:Item key="minus" text="-"/>
+                        <core:Item key="multiple" text="*"/>
+                        <core:Item key="divide" text="/"/>
+                       
+                    </items>
+                </Select>
+                <Input id="idInput2" ></Input>
+                <Button text='push' width="100%" type="Emphasized" press="onButtonPress"></Button>
+            </l:VerticalLayout>
+
+        </content>
+    </Page>
+</mvc:View>
