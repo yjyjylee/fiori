@@ -11,9 +11,11 @@ sap.ui.define([
             onInit: function () {
 
             },
-            onSelectionChange : function() {
+            onSelectionChange : function(oEvent) {
                 var oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo("RouteDetail");
+                var sPath = oEvent.getParameters().listItem.getBindingContextPath(),
+                skey = this.getView().getModel().getProperty(sPath+'/OrderID');
+                oRouter.navTo("RouteDetail" , {"key": skey});
             }
         }); 
     });

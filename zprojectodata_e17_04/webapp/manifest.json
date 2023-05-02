@@ -101,7 +101,7 @@
           ]
         },{
           "name": "RouteDetail",
-          "pattern": "Detail",
+          "pattern": "Detail/{key}/:option:",
           "target": [
             "TargetDetail"
           ]
