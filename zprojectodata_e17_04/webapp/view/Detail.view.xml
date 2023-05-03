@@ -1,9 +1,40 @@
-<mvc:View controllerName="zprojectodatae1704.controller.Detail"
+<mvc:View xmlns:table="sap.ui.table" controllerName="zprojectodatae1704.controller.Detail"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout">
     <Page id="page" title="Detail" showNavButton="true" navButtonPress="onNavButtonPress">
-        <content>
-            <Text text="detail view"></Text>
+    <content>
+        <!-- 강사님 -->
+        <l:VerticalLayout>
+            <Input value="{DetailModel>/data/OrderID}" description="CustomerID"></Input>
+            <Input value="{DetailModel>/data/Customer/City}"></Input>
+            <Input value="{DetailModel>/data/Customer/CompanyName}"></Input>
+            <Input value="{DetailModel>/data/Employee/Address}"></Input>
+            <Input value="{DetailModel>/data/CustomerID}"></Input>
+        </l:VerticalLayout>
+        <!-- 나 -->
+            <!-- <Text text="detail view"></Text>
+            <Table>
+                <columns>
+                    <Column>
+                        <Text text="OrderID" />
+                    </Column>
+                    <Column>
+                        <Text text="C_City" />
+                    </Column>
+                    <Column>
+                        <Text text="E_Address" />
+                    </Column>
+                </columns>
+                <ColumnListItem>
+                    <cells>
+                        <Text text="{Detail>/title/OrderID}" wrapping="false" />
+                        <Text text="{Detail>/title/City}" wrapping="false" />
+                        <Text text="{Detail>/title/Address}" wrapping="false" />
+                    </cells>
+                </ColumnListItem>
+            </Table> -->
+
         </content>
     </Page>
 </mvc:View>

@@ -1,0 +1,68 @@
+<mvc:View controllerName="zprojectodatae1705.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <l:Grid defaultSpan="XL3 L3 M6 S12">
+                <Input id="no" value="{main>/Productno}" placeholder="Productno"></Input>
+                <Input id="name" value="{main>/Productname}" placeholder="Productname"></Input>
+                <Input id="fname" value="{main>/Fname}" placeholder="Fname"></Input>
+                <Input id="lname" value="{main>/Lname}" placeholder="Lname"></Input>
+                <Input id="memo" value="{main>/Memo}" placeholder="Memo"></Input>
+            </l:Grid>
+            <t:Table
+                id="idTable"
+                rows="{/Products}"
+                selectionMode="Single"
+                visibleRowCount="10"
+                paste="onPaste"
+                ariaLabelledBy="title"
+                selectionBehavior="RowOnly">
+                <t:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title id="title" text="Products" />
+                        <ToolbarSpacer/>
+                        <Button text="create" press="onCreate" type="Emphasized"></Button>
+                        <Button text="update" press="onUpdate" type="Emphasized"></Button>
+                        <Button text="delete" press="onDelete" type="Emphasized"></Button>
+                        <Button text="Read Entity" press="onReadEntity" type="Emphasized"></Button>
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column>
+                        <Label text="Product No" />
+                        <t:template>
+                            <Text text="{Productno}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                      <t:Column>
+                        <Label text="Product Name" />
+                        <t:template>
+                            <Text text="{Productname}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <Label text="Fname" />
+                        <t:template>
+                            <Text text="{Fname}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <Label text="Lname" />
+                        <t:template>
+                            <Text text="{Lname}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <Label text="Memo" />
+                        <t:template>
+                            <Text text="{Memo}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </content>
+    </Page>
+</mvc:View>

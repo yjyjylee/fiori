@@ -87,8 +87,8 @@
                                 text="{OrderDate}" />
                             <Text
                                 text="{RequiredDate}" />
-                            <Text
-                                text="{ShippedDate}" />
+                            <Text text="{ShippedDate}" />
+                            <!-- <Text text="{모델이름>/ShippedDate}" /> -->
                         </cells>
                     </ColumnListItem>
                 </items>

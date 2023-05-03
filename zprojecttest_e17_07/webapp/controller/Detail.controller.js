@@ -12,6 +12,7 @@ sap.ui.define([
                 var oRouter = this.getOwnerComponent().getRouter();
                 oRouter.getRoute("RouteDetail").attachPatternMatched(this._onPatternMatched,this)
                 //RouteDetail에 해당pattern이 맞으면 onPatternMatched라는 함수를 실행하겠다
+                //원래 onInit함수는 처음에 한번만 실행.
             }, 
             _onPatternMatched: function (oEvent) {
                 // oEvent.getParameters().arguments; 이거랑 똑같음.
