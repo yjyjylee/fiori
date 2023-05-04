@@ -1,0 +1,44 @@
+<mvc:View controllerName="zprojectteste1708.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:layout="sap.ui.layout"
+    xmlns:viz="sap.viz.ui5.controls" 
+    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:viz.data="sap.viz.ui5.data">
+    <Page id="page" title="{i18n>title}">
+        <content >
+        <!-- drawingEffect = 입체감 -->
+            <viz:Popover id="idViewPopover"></viz:Popover>
+            <viz:VizFrame id="idViewChart" vizType="stacked_bar" width="50%" height="50%"
+            vizProperties="{ 'title' : { text : 'yj chart' , visible : true },
+            'plotArea' : {
+                drawingEffect : 'glossy' ,
+                colorPalette : [ '#D1B2FF' , '#FFB2F5']
+            } }">
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{view>/list}"> 
+                    <!-- data = items /row와 같은 느낌 -->
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="과목" value="{view>name}"></viz.data:DimensionDefinition>
+                        </viz.data:dimensions>
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="점수" value="{view>rate}"></viz.data:MeasureDefinition>
+                            <viz.data:MeasureDefinition name="점수2" value="{view>cost}"></viz.data:MeasureDefinition>
+                            <!-- data가 list를 바라보고 있어서 / 안줘도 접근가능 ( 1레벨 ) -->
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+                <viz:feeds>
+                    <!-- pie차트 -->
+                    <!-- <viz.feeds:FeedItem type="Dimension" uid="color" values="과목"></viz.feeds:FeedItem>
+                    <viz.feeds:FeedItem type="Measure" uid="size" values="점수"></viz.feeds:FeedItem> -->
+                    <!-- colunm 차트 / line 차트 -->
+                    <viz.feeds:FeedItem type="Dimension" uid="categoryAxis" values="과목"></viz.feeds:FeedItem>
+                    <viz.feeds:FeedItem type="Measure"  uid="valueAxis" values="점수"></viz.feeds:FeedItem>
+                    <viz.feeds:FeedItem type="Measure"  uid="valueAxis" values="점수2"></viz.feeds:FeedItem>
+                </viz:feeds>
+            </viz:VizFrame>
+            <!-- ver2 -->
+            <viz:VizFrame id="idConChart" vizType="column"></viz:VizFrame>
+        </content >
+    </Page>
+</mvc:View>
