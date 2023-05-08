@@ -1,0 +1,41 @@
+<mvc:View controllerName="sap.btp.ux400solving.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <VBox class="sapUiLargeMargin">
+                <Text text="버튼을 클릭하면 아래 INPUT값이 랜덤으로 채워집니다"></Text>
+                <Input id="idInput" value ="{list>/text}" type="Number" change="onValueChange" ></Input>
+                <Button text="Random" press="onRandomPress" id="idButton"></Button>
+            </VBox>
+            <VBox class="sapUiLargeMargin">
+                <t:Table
+                    rows="{list>/rows}"
+                    selectionMode="MultiToggle"
+                    visibleRowCount="7"
+                    paste="onPaste"
+                    ariaLabelledBy="title"
+                    width="50%">
+                    <t:extension>
+                        <OverflowToolbar style="Clear">
+                            <Title id="title" text="랜덤목록리스트" />
+                        </OverflowToolbar>
+                    </t:extension>
+                    <t:columns>
+                        <t:Column>
+                            <Label text="value" />
+                            <t:template>
+                                <Text text="{list>text}" wrapping="false" />
+                                <!-- "{list>/datas/0/text}" list모델의 datas는 배열임.
+                                배열의 index값을 0, 1, 2, 3 계속 순서대로 줄 수 없어서 /datas/0를 생략해서 
+                                동적으로 바인딩--> 
+                            </t:template>
+                        </t:Column>
+                    </t:columns>
+                </t:Table>
+                <Button text="openProduct" press="onOpenproduct"></Button>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>
