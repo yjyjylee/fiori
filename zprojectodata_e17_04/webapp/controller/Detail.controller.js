@@ -62,6 +62,7 @@ sap.ui.define([
                     success: function (aaa) {
                         oView.setBusy(false);
                         oDetailModel.setProperty("/data",aaa.results[0])
+                        //여기서 'data' 라는 이름이 만들어짐
                     }.bind(this),
 
                     error: function () {

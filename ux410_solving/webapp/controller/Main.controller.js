@@ -26,8 +26,7 @@ sap.ui.define([
             var oComboBox = this.byId("idComboBox");
             var oComboBox2 = this.byId("idComboBox2");
             var oGetkey = oComboBox.getSelectedKey();
-            // console.log(oGetkey);
-            // debugger;
+            // oEvent 매개변수 주고
             
             let oFilter = new Filter({path :'OrderID',operator:'EQ',value1: oGetkey});
             

@@ -28,6 +28,7 @@
                                         path: '/Orders',
                                         templateShareable: true
                                     }">
+                                    <!-- items 바인딩 기존에 하던걸 풀어서 써준것 -->
                                     <core:ListItem key="{OrderID}" text="{OrderID}"
                                         additionalText="{CustomerID}" />
                                 </ComboBox>
@@ -36,6 +37,7 @@
                         <fb:FilterGroupItem groupName="__$INTERNAL$" name="type" label="type"
                             visibleInFilterBar="true">
                             <fb:control>
+                            <!-- controller(setvalue메소드사용)에서 초기값 주면 충돌날 수도 있음 -->
                                 <ComboBox
                                     id="idComboBox2" required="true"
                                     selectedKey="bar"
@@ -66,7 +68,7 @@
                     }
                     }">
                 <viz:dataset>
-                    <viz.data:FlattenedDataset data="{/Order_Details}" id="idOrderDataset">
+                    <viz.data:FlattenedDataset id="idOrderDataset" data="{/Order_Details}">
                     <!-- data="{이름>/경로}" 이름이 없어서 생략 -->
                         <viz.data:dimensions>
                             <viz.data:DimensionDefinition name="OrderID" value="{OrderID}"></viz.data:DimensionDefinition>

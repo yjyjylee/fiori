@@ -30,7 +30,7 @@
                     <t:Column width="11rem">
 						<Label text="City from" />
 						<t:template>
-							<Text text="{CItyfrom}" wrapping="false" />
+							<Text text="{Cityfrom}" wrapping="false" />
 						</t:template>
 					</t:Column>
 				</t:columns>
