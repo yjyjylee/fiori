@@ -1,0 +1,79 @@
+<mvc:View controllerName="exprograme17.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page id="page" title="항공사 및 항공편 조회">
+        <content>
+        <HBox>
+            <VBox width="20%" class="sapUiSmallMargin">
+                <Label text= "Currency Code" width="100%"></Label>
+                <ComboBox 
+                    width="100%"
+                    id="idComboBox" required="true"
+                    showSecondaryValues="true"
+                    items="{
+                    path: 'CCList>/list',
+                    templateShareable: true}">
+                    <core:ListItem key="{CCList>type}" text="{CCList>type}" />
+                </ComboBox>
+                <Label text= "Carrier Name"></Label>
+				<Input id="idCarrierName"></Input>
+                <Button text="Search" press="OnSearch" width="100%" type="Emphasized"></Button>
+            </VBox>
+            <VBox width="77%">
+                <Table id="idcarrierSet"
+						inset="false"
+						items="{
+                                path : '/carrierSet',
+                                parameters: {
+                                    'expand' : 'to_Item'
+                                                        }
+                                                        }">
+                                                
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<Title text="Carrier List" level="H2" />
+										<ToolbarSpacer />
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+							<columns>
+								<Column>
+									<Text text="Carrid" />
+								</Column>
+								<Column>
+									<Text text="Carrname" />
+								</Column>
+								<Column>
+									<Text text="Currcode" />
+								</Column>
+								<Column>
+									<Text text="Url" />
+								</Column>
+								<Column>
+									<Text text="Length" />
+								</Column>
+                                <Column>
+									<Text text="Detail" />
+								</Column>
+							</columns>
+                        <items>
+                            <ColumnListItem vAlign="Middle">
+                                <cells>
+                                    <Text text="{Carrid}" />
+                                    <Text text="{Carrname}" />
+                                    <Text text="{Currcode}" />
+                                    <Text text="{Url}" />
+                                    <Text text= "{= ${to_Item}.length}" />
+                                    <Button text="예약 현황" press="onItem" enabled="{= ${to_Item}.length &lt; 1 ? false : true }"/>
+                                    	 
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+				    </Table>
+                </VBox>
+            </HBox>
+        </content>
+    </Page>
+</mvc:View>

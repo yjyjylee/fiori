@@ -8,6 +8,7 @@
             <Label labelFor="idCustomer" text = "Customer" ></Label>
             <Input id="idCustomer" required="true"></Input>
             <Button text="click" press="onClick"></Button>
+            <Image src="../image/image.png" ></Image>
             <!-- <VBox >
                 <Input id ="idInput3" />
                 <CheckBox  id ="idCheckbox"></CheckBox>

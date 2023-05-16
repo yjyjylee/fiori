@@ -15,6 +15,7 @@ sap.ui.define([
                 var oRouter = this.getOwnerComponent().getRouter();
                 var sPath = oEvent.getParameters().listItem.getBindingContextPath(),
                     skey = this.getView().getModel().getProperty(sPath + '/OrderID');
+                console.log(sPath); //{key: '10248', option: undefined}
                 oRouter.navTo("RouteDetail", { "key": skey });
             },
             onValueHelpRequest: function () {
