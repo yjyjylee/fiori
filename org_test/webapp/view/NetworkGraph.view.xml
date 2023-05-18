@@ -8,8 +8,8 @@
         <m:content>
             <Graph enableWheelZoom="false"
 		   orientation="TopBottom"
-		   nodes="{/nodes}"
-		   lines="{/lines}"
+		   nodes="{nodes}"
+		   lines="{lines}"
 		 
 		   searchSuggest="suggest"
 		   search="search"

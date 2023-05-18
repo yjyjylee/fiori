@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" 
+xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
+<Dialog id="idTable" title="employee" beforeOpen="onBeforeOpen">
+    <content>
+		<Text text="123"></Text>
+        <!-- <t:Table id="empTable"
+				rows="{/zezo_empdepSet}"
+				visibleRowCount="20"
+                selectionMode="Single"
+				paste="onPaste"
+				ariaLabelledBy="title"
+				rowSelectionChange="onRowSelectionChange">
+				<t:columns>
+					<t:Column >
+						<Label text="사번" />  
+						<t:template>
+							<Text text="{Pernr}" />
+						</t:template>
+					</t:Column>
+                    <t:Column >
+						<Label text="이름" />  
+						<t:template>
+							<Text text="{Name}" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table> -->
+    </content>
+
+    <endButton>
+        <!-- .은 현재 위치 라는 의미 -->
+        <Button text="close" press="onClose"> 
+        </Button>
+    </endButton>
+</Dialog>
+</core:FragmentDefinition>

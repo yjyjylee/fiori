@@ -215,7 +215,7 @@ sap.ui.define([
 
 			// **********팝업 */
 			// 괄호안에 ("라우트이름", {파라미터 정보})
-			var oDialog = this.byId("addDialog");
+			var oDialog = this.byId("idTable");
 			//3)한번 열리고 나면 그 때 부터는 if문 탐. controller에 붙여줘서.
 			if (oDialog) {
 				oDialog.open();
@@ -223,7 +223,7 @@ sap.ui.define([
 			}
 			//1)처음에는 여기를 탐. controller에 addDiaglog가 없어서 if문 안탐
 			this.loadFragment({
-				name: "orgtest.view.addDialog" //name에 경로 지정 폴더안에, 폴더안에 , dialog
+				name: "orgtest.view.Table" //name에 경로 지정 폴더안에, 폴더안에 , dialog
 				//2)여기서 fragment load하고, this로 controller에 붙여줌.
 			}).then(function (oDialog) {
 				oDialog.open();
@@ -231,7 +231,7 @@ sap.ui.define([
 		},
 
 		GraphController.prototype.onClose = function () {
-			var oDialog = this.byId("addDialog");
+			var oDialog = this.byId("idTable");
 			oDialog.close();
 		};
 
