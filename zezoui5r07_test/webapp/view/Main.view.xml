@@ -1,0 +1,91 @@
+<mvc:View controllerName="zezoui5r07test.controller.Main"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:m="sap.m"
+    xmlns="sap.suite.ui.commons.networkgraph"
+	xmlns:layout="sap.suite.ui.commons.networkgraph.layout"
+    xmlns:core="sap.ui.core">
+    <m:Page id="page" title="{i18n>title}">
+        <m:content>
+		<Graph enableWheelZoom="false"
+		   orientation="TopBottom"
+		   nodes="{/nodes}"
+		   lines="{/lines}"
+		 
+		   searchSuggest="suggest"
+		   search="search"
+		   id="graph">
+		<layoutAlgorithm>
+			<layout:LayeredLayout
+					mergeEdges="true"
+					nodePlacement="Simple"
+					nodeSpacing="40"/>
+		</layoutAlgorithm>
+		<nodes>
+			<Node icon="sap-icon://action-settings"
+				  key="{id}"
+				  description="{title}"
+				  title="{title}"
+				  width="90"
+				  collapsed="{collapsed}"
+				  attributes="{attributes}"
+				  showActionLinksButton="false"
+				  showDetailButton="false"
+				  descriptionLineSize="0"
+				  shape="Box">
+				<customData>
+					<core:CustomData key="supervisor" value="{supervisor}"/>
+					<core:CustomData key="team" value="{team}"/>
+					<core:CustomData key="location" value="{location}"/>
+					<core:CustomData key="position" value="{position}"/>
+					<core:CustomData key="team" value="{team}"/>
+					<core:CustomData key="email" value="{email}"/>
+					<core:CustomData key="phone" value="{phone}"/>
+				</customData>
+				<attributes>
+					<ElementAttribute label="{label}" value="{value}"/>
+				</attributes>
+				<!-- 이미지크기 -->
+				<image>
+					<NodeImage src="{src}"
+							   width="80"
+							   height="100"/>
+				</image>
+			</Node>
+		</nodes>
+		<!-- arrowOrientation 노드를 연결하는 선 -->
+		<lines>
+			<Line from="{from}" to="{to}" arrowOrientation="None" press="linePress" />
+		</lines>
+	</Graph>
+        <!-- <t:Table id="empTable"
+				rows="{Employ>/zezo_empdepSet}"
+				visibleRowCount="20"
+                selectionMode="Single"
+				paste="onPaste"
+				ariaLabelledBy="title"
+				rowSelectionChange="onRowSelectionChange">
+				<t:columns>
+					<t:Column >
+						<m:Label text="사번" />  
+						<t:template>
+							<m:Text text="{Employ>Pernr}" />
+						</t:template>
+					</t:Column>
+                    <t:Column >
+						<m:Label text="이름" />  
+						<t:template>
+							<m:Text text="{Employ>Name}" />
+						</t:template>
+					</t:Column>
+                       <t:Column >
+						<m:Label text="성별" />  
+						<t:template>
+							<m:Text text="{Employ>Gender}" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table> -->
+    </m:content>
+
+    </m:Page>
+</mvc:View>

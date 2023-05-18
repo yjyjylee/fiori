@@ -1,0 +1,10 @@
+<mvc:View controllerName="orgtest.controller.Detail"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="Detail" showNavButton="true" navButtonPress="onNavButtonPress">
+        <content>
+            <Text text="detail view"></Text>
+            <Button text="test" press="onPress"></Button>
+        </content>
+    </Page>
+</mvc:View>
