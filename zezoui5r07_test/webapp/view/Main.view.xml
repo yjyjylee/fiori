@@ -24,7 +24,7 @@
 			
 			<Node 
 				  key="{id}"
-				  description="{title}"
+				  description="{description}"
 				  title="{title}"
 				  width="90"
 				  collapsed="false"

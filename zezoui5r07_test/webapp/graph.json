@@ -1,12 +1,13 @@
 {
 	"nodes": [
 		{
-			"id": "Dinter",
+			"id": "10000000",
 			"title": "(주) EZO Cosmetics",
+			"description": "본부(Headquarter)",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_IngallsB.jpg",
 			"attributes": [
 				{
-					"label": 35,
+					"label": "11" ,
 					"value": ""
 				}
 			],
@@ -26,7 +27,7 @@
 					"value": ""
 				}
 			],
-			"supervisor": "Dinter",
+			"supervisor": "10000000",
 			"team": 2,
 			"location": "Walldorf",
 			"position": "Lead Markets Manager",
@@ -44,7 +45,7 @@
 					"value": ""
 				}
 			],
-			"supervisor": "Dinter",
+			"supervisor": "10000000",
 			"team": 9,
 			"location": "Walldorf",
 			"position": "Lead Markets Manager",
@@ -61,7 +62,7 @@
 					"value": ""
 				}
 			],
-			"supervisor": "Dinter",
+			"supervisor": "10000000",
 			"team": 1,
 			"location": "Walldorf",
 			"position": "Lead Markets Manager",
@@ -69,7 +70,7 @@
 			"phone": "+000 423 230 002"
 		},
 		{
-			"id": "account",
+			"id": "10004001",
 			"title": "회계재무",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "ara",
@@ -79,7 +80,7 @@
 			"phone": "+000 423 235 008"
 		},
 		{
-			"id": "Rbuy",
+			"id": "10003001",
 			"title": "원자재구매",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "yoonji",
@@ -90,7 +91,7 @@
 		},
 	
 		{
-			"id": "Sbuy",
+			"id": "10003002",
 			"title": "부자재구매",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "yoonji",
@@ -131,7 +132,7 @@
 					"value": ""
 				}
 			],
-			"supervisor": "Dinter",
+			"supervisor": "10000000",
 			"team": 2,
 			"location": "Brno",
 			"position": "Development Supervisor",
@@ -160,7 +161,7 @@
 			"phone": "+000 423 235 025"
 		},
 		{
-			"id": "Plant",
+			"id": "10002001",
 			"title": "생산팀",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_SpringS.jpg",
 			"supervisor": "House",
@@ -179,7 +180,7 @@
 	
 		{
 			"from": "House",
-			"to": "Plant"
+			"to": "10002001"
 		},
 
 		{
@@ -187,22 +188,22 @@
 			"to": "House"
 		},
 		{
-			"from": "Dinter",
+			"from": "10000000",
 			"to": "Ortmann"
 		},
 		{
-			"from": "Dinter",
+			"from": "10000000",
 			"to": "Ninsei"
 		},
 
 
 		{
-			"from": "Dinter",
+			"from": "10000000",
 			"to": "yoonji"
 		},
 		
 		{
-			"from": "Dinter",
+			"from": "10000000",
 			"to": "ara"
 		},
 		
@@ -216,15 +217,15 @@
 		},
 		{
 			"from": "yoonji",
-			"to": "Sbuy"
+			"to": "10003002"
 		},
 		{
 			"from": "yoonji",
-			"to": "Rbuy"
+			"to": "10003001"
 		},
 		{
 			"from": "ara",
-			"to": "account"
+			"to": "10004001"
 		}
 	]
 }

@@ -3,8 +3,7 @@ xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
 <Dialog id="idTable" title="add" beforeOpen="onBeforeOpen">
     <content>
         <t:Table id="empTable"
-				rows="{ path: 'Employ>/zezo_empdepSet'
-				
+				rows="{ path: 'FilterModel>/data'
 				}"
 				visibleRowCount="20"
                 selectionMode="Single"
@@ -16,13 +15,13 @@ xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
 					<t:Column >
 						<Label text="사번" />  
 						<t:template>
-							<Text text="{Employ>Pernr}" />
+							<Text text="{FilterModel>Pernr}" />
 						</t:template>
 					</t:Column>
                     <t:Column >
 						<Label text="이름" />  
 						<t:template>
-							<Text text="{Employ>Name}" />
+							<Text text="{FilterModel>Name}" />
 						</t:template>
 					</t:Column>
 				</t:columns>

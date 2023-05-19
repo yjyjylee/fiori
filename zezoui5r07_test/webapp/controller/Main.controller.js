@@ -15,10 +15,10 @@ sap.ui.define([
 
 		var GraphController = Controller.extend("zezoui5r07test.controller.Main");
 
-		var STARTING_PROFILE = "Dinter";
+		var STARTING_PROFILE = "10000000";
 
 		GraphController.prototype.onInit = function () {
-			// this.getView().getModel("Employ")
+			this.getView().setModel(new JSONModel(),"FilterModel")
 			this._oModel = new JSONModel(sap.ui.require.toUrl("zezoui5r07test/graph.json"));
 			this._oModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 
@@ -82,7 +82,7 @@ sap.ui.define([
 					}
 
 					//본부에는 사람 모양 버튼 줌.
-					if (oNode.getKey() === 'Dinter') {
+					if (oNode.getKey() === '10000000') {
 						oTableButton = new ActionButton({
 							title: "Detail",
 							icon: "sap-icon://person-placeholder",
@@ -91,7 +91,7 @@ sap.ui.define([
 							}.bind(this)
 						});
 						oNode.addActionButton(oTableButton)
-						console.log('dinter');
+
 					}
 					// // if current user is root we can add 'up one level'
 					// if (oNode.getKey() === this._sTopSupervisor) {
@@ -229,20 +229,44 @@ sap.ui.define([
 			//***********디테일 페이지로 이동.
 
 			var oRouter = this.getOwnerComponent().getRouter();
+			var oFilterModel = this.getView().getModel('FilterModel');
 			var sPath = oEvent.getParameters().rowContext.sPath,
-				skey = this.getView().getModel('Employ').getProperty(sPath);
+				skey = this.getView().getModel('FilterModel').getProperty(sPath);
+			
+		
 			// debugger;
-			console.log(sPath); //{key: '10248', option: undefined}
-			oRouter.navTo("RouteDetail", { "key": skey.Pernr });
+			// console.log(oFilterModel.getProperty(sPath)['Pernr']); //{key: '10248', option: undefined}
+			oRouter.navTo("RouteDetail", { "key": oFilterModel.getProperty(sPath)['Pernr'] });
 		};
 
 		GraphController.prototype._openTable = function (oNode, oButton) {
+			var sDeptKey = oNode.getKey();
+			var oFilter = new sap.ui.model.Filter('Deptcode', 'EQ', sDeptKey);
+			var oFilterModel = this.getView().getModel('FilterModel');
+			var oODataModel = this.getView().getModel('Employ');
+
+			// debugger;
+			oODataModel.read("/zezo_empdepSet", {
+                    filters: [oFilter],
+                    success: function(oReturn) {
+                        oFilterModel.setProperty("/data", oReturn.results);
+                    }.bind(this),
+                    error: function() {
+                        sap.m.MessageToast.show('에러 발생');
+                    }
+                });
+
+			// debugger;
+			
+			// oDataset.getBinding("items").filter([oFilter]);
+
 			// **********사원 테이블 팝업 */
 			
-			console.log(oNode.getKey());
+			// console.log(oNode.getKey());
 			// debugger;
 			// 괄호안에 ("라우트이름", {파라미터 정보})
 			var oDialog = this.byId("idTable");
+			// debugger;
 			//3)한번 열리고 나면 그 때 부터는 if문 탐. controller에 붙여줘서.
 			if (oDialog) {
 				oDialog.open();
