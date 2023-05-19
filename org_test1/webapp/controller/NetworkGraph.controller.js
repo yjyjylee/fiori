@@ -5,29 +5,29 @@ sap.ui.define([
 	"sap/suite/ui/commons/networkgraph/layout/ForceBasedLayout",
 	"sap/suite/ui/commons/networkgraph/ActionButton",
 	"sap/suite/ui/commons/networkgraph/Node",
+	"sap/suite/ui/commons/networkgraph/NodeImage",
 	"sap/ui/core/Fragment"
 ],
 	/**
 	 * @param {typeof sap.ui.core.mvc.Controller} Controller
 	 */
-	function (JSONModel, Controller, LayeredLayout, ForceBasedLayout, ActionButton, Node, Fragment) {
+	function (JSONModel, Controller, LayeredLayout, ForceBasedLayout, ActionButton, Node, Fragment,NodeImage) {
 		"use strict";
 
 		var GraphController = Controller.extend("orgtest.controller.NetworkGraph");
 
-		var STARTING_PROFILE = "Mann";
+		var STARTING_PROFILE = "Dinter";
 
 		GraphController.prototype.onInit = function () {
-			this.getView().getModel("Employ")
+			// this.getView().getModel("Employ")
 			this._oModel = new JSONModel(sap.ui.require.toUrl("orgtest/graph.json"));
 			this._oModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 
-			this._sTopSupervisor = STARTING_PROFILE;
+			this._sTopSupervisor = STARTING_PROFILE; //dinter
 			this._mExplored = [this._sTopSupervisor];
 
 			this._graph = this.byId("graph");
 			this.getView().setModel(this._oModel);
-
 			this._setFilter();
 
 			this._graph.attachEvent("beforeLayouting", function (oEvent) {
@@ -35,12 +35,13 @@ sap.ui.define([
 				// which results in multiple unnecessary loading
 				this._graph.preventInvalidation(true);
 				this._graph.getNodes().forEach(function (oNode) {
+					// debugger;
 					var oExpandButton, oDetailButton, oUpOneLevelButton,
 						sTeamSize = this._getCustomDataValue(oNode, "team"),
 						sSupervisor;
 
 					oNode.removeAllActionButtons();
-
+					//+, - 버튼
 					if (!sTeamSize) {
 						// employees without team - hide expand buttons
 						oNode.setShowExpandButton(false);
@@ -67,80 +68,101 @@ sap.ui.define([
 						}
 					}
 
-					// add detail link -> custom popover
-					oDetailButton = new ActionButton({
-						title: "Detail",
-						icon: "sap-icon://person-placeholder",
-						press: function (oEvent) {
-							this._openDetail(oNode, oEvent.getParameter("buttonElement"));
-						}.bind(this)
-					});
-					oNode.addActionButton(oDetailButton);
+					// add detail link -> custom popover 
+					//사람모양 버튼
+					if(!sTeamSize) {
+						oDetailButton = new ActionButton({
+							title: "Detail",
+							icon: "sap-icon://person-placeholder",
+							press: function (oEvent) {
+								this._openDetail(oNode, oEvent.getParameter("buttonElement"));
+							}.bind(this)
+						});
+						oNode.addActionButton(oDetailButton);
+					}else {
+
+					}	
+					
 
 					// if current user is root we can add 'up one level'
-					if (oNode.getKey() === this._sTopSupervisor) {
-						sSupervisor = this._getCustomDataValue(oNode, "supervisor");
-						if (sSupervisor) {
-							oUpOneLevelButton = new ActionButton({
-								title: "Up one level",
-								icon: "sap-icon://arrow-top",
-								press: function () {
-									var aSuperVisors = oNode.getCustomData().filter(function (oData) {
-										return oData.getKey() === "supervisor";
-									}),
-										sSupervisor = aSuperVisors.length > 0 && aSuperVisors[0].getValue();
+					// if (oNode.getKey() === this._sTopSupervisor) {
+					// 	sSupervisor = this._getCustomDataValue(oNode, "supervisor");
+					// 	if (sSupervisor) {
+					// 		oUpOneLevelButton = new ActionButton({
+					// 			title: "Up one level",
+					// 			icon: "sap-icon://arrow-top",
+					// 			press: function () {
+					// 				var aSuperVisors = oNode.getCustomData().filter(function (oData) {
+					// 					return oData.getKey() === "supervisor";
+					// 				}),
+					// 					sSupervisor = aSuperVisors.length > 0 && aSuperVisors[0].getValue();
 
-									this._loadMore(sSupervisor);
-									this._sTopSupervisor = sSupervisor;
-								}.bind(this)
-							});
-							oNode.addActionButton(oUpOneLevelButton);
-						}
-					}
+					// 				this._loadMore(sSupervisor);
+					// 				this._sTopSupervisor = sSupervisor;
+					// 			}.bind(this)
+					// 		});
+					// 		oNode.addActionButton(oUpOneLevelButton);
+					// 	}
+					// }
+					// if(oNode.getKey() === 'Dinter'){
+					// 	// var oImage = new sap.suite.ui.commons.networkgraph.shape.Image({
+					// 	// 	width: 50, // 이미지 너비
+					// 	// 	height: 50, // 이미지 높이
+					// 	// 	src: "../image/image.png" // 이미지 경로
+					// 	// });
+					// 	var oImage = new NodeImage.setSrc('../image/image.png');
+					// 	oNode.setImage(setSrc(oImage));
+					// 	// oNode.setImage(oImage);
+					// 	console.log('dinter');
+					// }
 				}, this);
+				
 				this._graph.preventInvalidation(false);
 			}.bind(this));
 		};
 
-		GraphController.prototype.search = function (oEvent) {
-			var sKey = oEvent.getParameter("key");
 
-			if (sKey) {
-				this._mExplored = [sKey];
-				this._sTopSupervisor = sKey;
-				this._graph.destroyAllElements();
-				this._setFilter();
+		//****서치버튼 
+		// GraphController.prototype.search = function (oEvent) {
+		// 	var sKey = oEvent.getParameter("key");
 
-				oEvent.bPreventDefault = true;
-			}
-		};
+		// 	if (sKey) {
+		// 		this._mExplored = [sKey];
+		// 		this._sTopSupervisor = sKey;
+		// 		this._graph.destroyAllElements();
+		// 		this._setFilter();
 
-		GraphController.prototype.suggest = function (oEvent) {
-			var aSuggestionItems = [],
-				aItems = this._oModel.getData().nodes,
-				aFilteredItems = [],
-				sTerm = oEvent.getParameter("term");
+		// 		oEvent.bPreventDefault = true;
+		// 	}
+		// };
 
-			sTerm = sTerm ? sTerm : "";
+		//****서치헬프
+		// GraphController.prototype.suggest = function (oEvent) {
+		// 	var aSuggestionItems = [],
+		// 		aItems = this._oModel.getData().nodes,
+		// 		aFilteredItems = [],
+		// 		sTerm = oEvent.getParameter("term");
 
-			aFilteredItems = aItems.filter(function (oItem) {
-				var sTitle = oItem.title ? oItem.title : "";
-				return sTitle.toLowerCase().indexOf(sTerm.toLowerCase()) !== -1;
-			});
+		// 	sTerm = sTerm ? sTerm : "";
 
-			aFilteredItems.sort(function (oItem1, oItem2) {
-				var sTitle = oItem1.title ? oItem1.title : "";
-				return sTitle.localeCompare(oItem2.title);
-			}).forEach(function (oItem) {
-				aSuggestionItems.push(new sap.m.SuggestionItem({
-					key: oItem.id,
-					text: oItem.title
-				}));
-			});
+		// 	aFilteredItems = aItems.filter(function (oItem) {
+		// 		var sTitle = oItem.title ? oItem.title : "";
+		// 		return sTitle.toLowerCase().indexOf(sTerm.toLowerCase()) !== -1;
+		// 	});
 
-			this._graph.setSearchSuggestionItems(aSuggestionItems);
-			oEvent.bPreventDefault = true;
-		};
+		// 	aFilteredItems.sort(function (oItem1, oItem2) {
+		// 		var sTitle = oItem1.title ? oItem1.title : "";
+		// 		return sTitle.localeCompare(oItem2.title);
+		// 	}).forEach(function (oItem) {
+		// 		aSuggestionItems.push(new sap.m.SuggestionItem({
+		// 			key: oItem.id,
+		// 			text: oItem.title
+		// 		}));
+		// 	});
+
+		// 	this._graph.setSearchSuggestionItems(aSuggestionItems);
+		// 	oEvent.bPreventDefault = true;
+		// };
 
 		GraphController.prototype.onExit = function () {
 			if (this._oQuickView) {
@@ -204,90 +226,49 @@ sap.ui.define([
 			return aItems.length > 0 && aItems[0].getValue();
 		};
 
+
+		//사람버튼 누르면 뜨는 팝업
 		GraphController.prototype._openDetail = function (oNode, oButton) {
-			//***********디테일 페이지로 이동.
-			// var oRouter = this.getOwnerComponent().getRouter();
-			// //getOwnerComponent() : component객체 (controller위)
+			var sTeamSize = this._getCustomDataValue(oNode, "team");
+			// debugger;
+			if (!this._oQuickView) {
+				Fragment.load({
+					name: "orgtest.view.TooltipFragment",
+					type: "XML"
+				}).then(function(oFragment) {
+					this._oQuickView = oFragment;
+					this._oQuickView.setModel(new JSONModel({
+						icon: oNode.getImage() && oNode.getImage().getProperty("src"),
+						title: oNode.getDescription(),
+						description: this._getCustomDataValue(oNode, "position"),
+						location: this._getCustomDataValue(oNode, "location"),
+						showTeam: !!sTeamSize,
+						teamSize: sTeamSize,
+						email: this._getCustomDataValue(oNode, "email"),
+						phone: this._getCustomDataValue(oNode, "phone")
+					}));
 
-			// oRouter.navTo("RouteDetail", {
-			// 	aa: 'Apple',
-			// 	bb: 'Banana'
+					setTimeout(function () {
+						this._oQuickView.openBy(oButton);
+					}.bind(this), 0);
+				}.bind(this));
+			} else {
+				this._oQuickView.setModel(new JSONModel({
+					icon: oNode.getImage() && oNode.getImage().getProperty("src"),
+					title: oNode.getDescription(),
+					description: this._getCustomDataValue(oNode, "position"),
+					location: this._getCustomDataValue(oNode, "location"),
+					showTeam: !!sTeamSize,
+					teamSize: sTeamSize,
+					email: this._getCustomDataValue(oNode, "email"),
+					phone: this._getCustomDataValue(oNode, "phone")
+				}));
 
-
-			// **********팝업 */
-			// 괄호안에 ("라우트이름", {파라미터 정보})
-			var oDialog = this.byId("addDialog");
-			//3)한번 열리고 나면 그 때 부터는 if문 탐. controller에 붙여줘서.
-			if (oDialog) {
-				oDialog.open();
-				return;
+				setTimeout(function () {
+					this._oQuickView.openBy(oButton);
+				}.bind(this), 0);
 			}
-			//1)처음에는 여기를 탐. controller에 addDiaglog가 없어서 if문 안탐
-			this.loadFragment({
-				name: "orgtest.view.addDialog" //name에 경로 지정 폴더안에, 폴더안에 , dialog
-				//2)여기서 fragment load하고, this로 controller에 붙여줌.
-			}).then(function (oDialog) {
-				oDialog.open();
-			}, this); //this를 사용해서 해당 controller를 같이 넘겨줌.
-		},
-
-		GraphController.prototype.onClose = function () {
-			var oDialog = this.byId("addDialog");
-			oDialog.close();
 		};
-
-		GraphController.prototype.onDetail = function () {
-			//***********디테일 페이지로 이동.
-			var oRouter = this.getOwnerComponent().getRouter();
-			//getOwnerComponent() : component객체 (controller위)
-
-			oRouter.navTo("RouteDetail", {
-				aa: 'Apple',
-				bb: 'Banana'
-			});
-		};
-
-
-		// 	var sTeamSize = this._getCustomDataValue(oNode, "team");
-
-		// 	if (!this._oQuickView) {
-		// 		Fragment.load({
-		// 			name: "orgtest.view.TooltipFragment",
-		// 			type: "XML"
-		// 		}).then(function(oFragment) {
-		// 			this._oQuickView = oFragment;
-		// 			this._oQuickView.setModel(new JSONModel({
-		// 				icon: oNode.getImage() && oNode.getImage().getProperty("src"),
-		// 				title: oNode.getDescription(),
-		// 				description: this._getCustomDataValue(oNode, "position"),
-		// 				location: this._getCustomDataValue(oNode, "location"),
-		// 				showTeam: !!sTeamSize,
-		// 				teamSize: sTeamSize,
-		// 				email: this._getCustomDataValue(oNode, "email"),
-		// 				phone: this._getCustomDataValue(oNode, "phone")
-		// 			}));
-
-		// 			setTimeout(function () {
-		// 				this._oQuickView.openBy(oButton);
-		// 			}.bind(this), 0);
-		// 		}.bind(this));
-		// 	} else {
-		// 		this._oQuickView.setModel(new JSONModel({
-		// 			icon: oNode.getImage() && oNode.getImage().getProperty("src"),
-		// 			title: oNode.getDescription(),
-		// 			description: this._getCustomDataValue(oNode, "position"),
-		// 			location: this._getCustomDataValue(oNode, "location"),
-		// 			showTeam: !!sTeamSize,
-		// 			teamSize: sTeamSize,
-		// 			email: this._getCustomDataValue(oNode, "email"),
-		// 			phone: this._getCustomDataValue(oNode, "phone")
-		// 		}));
-
-		// 		setTimeout(function () {
-		// 			this._oQuickView.openBy(oButton);
-		// 		}.bind(this), 0);
-		// 	}
-		// };
 
 		//linePress : 노드 연결하는 선 눌렀을 때 이벤트.
 		GraphController.prototype.linePress = function (oEvent) {

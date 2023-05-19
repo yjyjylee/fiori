@@ -3,7 +3,9 @@ xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
 <Dialog id="idTable" title="add" beforeOpen="onBeforeOpen">
     <content>
         <t:Table id="empTable"
-				rows="{Employ>/zezo_empdepSet}"
+				rows="{ path: 'Employ>/zezo_empdepSet'
+				
+				}"
 				visibleRowCount="20"
                 selectionMode="Single"
 				paste="onPaste"

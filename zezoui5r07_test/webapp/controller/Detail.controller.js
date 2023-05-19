@@ -24,11 +24,12 @@ sap.ui.define([
                 // debugger;
                 var oFilter = new sap.ui.model.Filter('Pernr', 'EQ', oArgu.key);
                 var oDetailModel = this.getView().getModel('DetailModel');
+                // debugger;
                 oModel.read("/zezo_empdepSet", {
                     
                     filters: [oFilter],
                     success: function (oReturn) {
-                        debugger;
+                        // debugger;
                         oDetailModel.setProperty("/data", oReturn.results[0])
                         //여기서 'data' 라는 이름이 만들어짐
                     }.bind(this),

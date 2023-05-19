@@ -1,5 +1,5 @@
 sap.ui.define([
-    "sap/ui/model/json/JSONModel",
+	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/mvc/Controller",
 	"sap/suite/ui/commons/networkgraph/layout/LayeredLayout",
 	"sap/suite/ui/commons/networkgraph/layout/ForceBasedLayout",
@@ -7,21 +7,15 @@ sap.ui.define([
 	"sap/suite/ui/commons/networkgraph/Node",
 	"sap/ui/core/Fragment"
 ],
-    /**
-     * @param {typeof sap.ui.core.mvc.Controller} Controller
-     */
-    function (JSONModel, Controller, LayeredLayout, ForceBasedLayout, ActionButton, Node, Fragment) {
-        "use strict";
+	/**
+	 * @param {typeof sap.ui.core.mvc.Controller} Controller
+	 */
+	function (JSONModel, Controller, LayeredLayout, ForceBasedLayout, ActionButton, Node, Fragment) {
+		"use strict";
 
-        // return Controller.extend("zezoui5r07test.controller.Main", {
-        //     onInit: function () {
-                
-        //     }
-        // });
+		var GraphController = Controller.extend("zezoui5r07test.controller.Main");
 
-        var GraphController = Controller.extend("zezoui5r07test.controller.Main");
-
-		var STARTING_PROFILE = "Mann";
+		var STARTING_PROFILE = "Dinter";
 
 		GraphController.prototype.onInit = function () {
 			// this.getView().getModel("Employ")
@@ -47,6 +41,7 @@ sap.ui.define([
 
 					oNode.removeAllActionButtons();
 
+					//+, - 버튼
 					if (!sTeamSize) {
 						// employees without team - hide expand buttons
 						oNode.setShowExpandButton(false);
@@ -73,36 +68,51 @@ sap.ui.define([
 						}
 					}
 
-					// add detail link -> custom popover
-					oTableButton = new ActionButton({
-						title: "Detail",
-						icon: "sap-icon://person-placeholder",
-						press: function (oEvent) {
-							this._openTable(oNode, oEvent.getParameter("buttonElement"));
-						}.bind(this)
-					});
-					oNode.addActionButton(oTableButton);
-
-					// if current user is root we can add 'up one level'
-					if (oNode.getKey() === this._sTopSupervisor) {
-						sSupervisor = this._getCustomDataValue(oNode, "supervisor");
-						if (sSupervisor) {
-							oUpOneLevelButton = new ActionButton({
-								title: "Up one level",
-								icon: "sap-icon://arrow-top",
-								press: function () {
-									var aSuperVisors = oNode.getCustomData().filter(function (oData) {
-										return oData.getKey() === "supervisor";
-									}),
-										sSupervisor = aSuperVisors.length > 0 && aSuperVisors[0].getValue();
-
-									this._loadMore(sSupervisor);
-									this._sTopSupervisor = sSupervisor;
-								}.bind(this)
-							});
-							oNode.addActionButton(oUpOneLevelButton);
-						}
+					// add detail link -> custom popover 
+					//사람모양 버튼
+					if (!sTeamSize) {
+						oTableButton = new ActionButton({
+							title: "Detail",
+							icon: "sap-icon://person-placeholder",
+							press: function (oEvent) {
+								this._openTable(oNode, oEvent.getParameter("buttonElement"));
+							}.bind(this)
+						});
+						oNode.addActionButton(oTableButton);
 					}
+
+					//본부에는 사람 모양 버튼 줌.
+					if (oNode.getKey() === 'Dinter') {
+						oTableButton = new ActionButton({
+							title: "Detail",
+							icon: "sap-icon://person-placeholder",
+							press: function (oEvent) {
+								this._openTable(oNode, oEvent.getParameter("buttonElement"));
+							}.bind(this)
+						});
+						oNode.addActionButton(oTableButton)
+						console.log('dinter');
+					}
+					// // if current user is root we can add 'up one level'
+					// if (oNode.getKey() === this._sTopSupervisor) {
+					// 	sSupervisor = this._getCustomDataValue(oNode, "supervisor");
+					// 	if (sSupervisor) {
+					// 		oUpOneLevelButton = new ActionButton({
+					// 			title: "Up one level",
+					// 			icon: "sap-icon://arrow-top",
+					// 			press: function () {
+					// 				var aSuperVisors = oNode.getCustomData().filter(function (oData) {
+					// 					return oData.getKey() === "supervisor";
+					// 				}),
+					// 					sSupervisor = aSuperVisors.length > 0 && aSuperVisors[0].getValue();
+
+					// 				this._loadMore(sSupervisor);
+					// 				this._sTopSupervisor = sSupervisor;
+					// 			}.bind(this)
+					// 		});
+					// 		oNode.addActionButton(oUpOneLevelButton);
+					// 	}
+					// }
 				}, this);
 				this._graph.preventInvalidation(false);
 			}.bind(this));
@@ -217,17 +227,20 @@ sap.ui.define([
 
 		GraphController.prototype.aaa = function (oEvent) {
 			//***********디테일 페이지로 이동.
-			
+
 			var oRouter = this.getOwnerComponent().getRouter();
-            var sPath = oEvent.getParameters().rowContext.sPath,
-                skey = this.getView().getModel('Employ').getProperty(sPath);
-				// debugger;
-            console.log(sPath); //{key: '10248', option: undefined}
-            oRouter.navTo("RouteDetail", { "key": skey.Pernr });
+			var sPath = oEvent.getParameters().rowContext.sPath,
+				skey = this.getView().getModel('Employ').getProperty(sPath);
+			// debugger;
+			console.log(sPath); //{key: '10248', option: undefined}
+			oRouter.navTo("RouteDetail", { "key": skey.Pernr });
 		};
 
 		GraphController.prototype._openTable = function (oNode, oButton) {
-			// **********팝업 */
+			// **********사원 테이블 팝업 */
+			
+			console.log(oNode.getKey());
+			// debugger;
 			// 괄호안에 ("라우트이름", {파라미터 정보})
 			var oDialog = this.byId("idTable");
 			//3)한번 열리고 나면 그 때 부터는 if문 탐. controller에 붙여줘서.
@@ -244,52 +257,52 @@ sap.ui.define([
 			}, this); //this를 사용해서 해당 controller를 같이 넘겨줌.
 		},
 
-		
-		// 	var sTeamSize = this._getCustomDataValue(oNode, "team");
 
-		// 	if (!this._oQuickView) {
-		// 		Fragment.load({
-		// 			name: "orgtest.view.TooltipFragment",
-		// 			type: "XML"
-		// 		}).then(function(oFragment) {
-		// 			this._oQuickView = oFragment;
-		// 			this._oQuickView.setModel(new JSONModel({
-		// 				icon: oNode.getImage() && oNode.getImage().getProperty("src"),
-		// 				title: oNode.getDescription(),
-		// 				description: this._getCustomDataValue(oNode, "position"),
-		// 				location: this._getCustomDataValue(oNode, "location"),
-		// 				showTeam: !!sTeamSize,
-		// 				teamSize: sTeamSize,
-		// 				email: this._getCustomDataValue(oNode, "email"),
-		// 				phone: this._getCustomDataValue(oNode, "phone")
-		// 			}));
+			// 	var sTeamSize = this._getCustomDataValue(oNode, "team");
 
-		// 			setTimeout(function () {
-		// 				this._oQuickView.openBy(oButton);
-		// 			}.bind(this), 0);
-		// 		}.bind(this));
-		// 	} else {
-		// 		this._oQuickView.setModel(new JSONModel({
-		// 			icon: oNode.getImage() && oNode.getImage().getProperty("src"),
-		// 			title: oNode.getDescription(),
-		// 			description: this._getCustomDataValue(oNode, "position"),
-		// 			location: this._getCustomDataValue(oNode, "location"),
-		// 			showTeam: !!sTeamSize,
-		// 			teamSize: sTeamSize,
-		// 			email: this._getCustomDataValue(oNode, "email"),
-		// 			phone: this._getCustomDataValue(oNode, "phone")
-		// 		}));
+			// 	if (!this._oQuickView) {
+			// 		Fragment.load({
+			// 			name: "orgtest.view.TooltipFragment",
+			// 			type: "XML"
+			// 		}).then(function(oFragment) {
+			// 			this._oQuickView = oFragment;
+			// 			this._oQuickView.setModel(new JSONModel({
+			// 				icon: oNode.getImage() && oNode.getImage().getProperty("src"),
+			// 				title: oNode.getDescription(),
+			// 				description: this._getCustomDataValue(oNode, "position"),
+			// 				location: this._getCustomDataValue(oNode, "location"),
+			// 				showTeam: !!sTeamSize,
+			// 				teamSize: sTeamSize,
+			// 				email: this._getCustomDataValue(oNode, "email"),
+			// 				phone: this._getCustomDataValue(oNode, "phone")
+			// 			}));
 
-		// 		setTimeout(function () {
-		// 			this._oQuickView.openBy(oButton);
-		// 		}.bind(this), 0);
-		// 	}
-		// };
+			// 			setTimeout(function () {
+			// 				this._oQuickView.openBy(oButton);
+			// 			}.bind(this), 0);
+			// 		}.bind(this));
+			// 	} else {
+			// 		this._oQuickView.setModel(new JSONModel({
+			// 			icon: oNode.getImage() && oNode.getImage().getProperty("src"),
+			// 			title: oNode.getDescription(),
+			// 			description: this._getCustomDataValue(oNode, "position"),
+			// 			location: this._getCustomDataValue(oNode, "location"),
+			// 			showTeam: !!sTeamSize,
+			// 			teamSize: sTeamSize,
+			// 			email: this._getCustomDataValue(oNode, "email"),
+			// 			phone: this._getCustomDataValue(oNode, "phone")
+			// 		}));
 
-		//linePress : 노드 연결하는 선 눌렀을 때 이벤트.
-		GraphController.prototype.linePress = function (oEvent) {
-			oEvent.bPreventDefault = true;
-		};
+			// 		setTimeout(function () {
+			// 			this._oQuickView.openBy(oButton);
+			// 		}.bind(this), 0);
+			// 	}
+			// };
+
+			//linePress : 노드 연결하는 선 눌렀을 때 이벤트.
+			GraphController.prototype.linePress = function (oEvent) {
+				oEvent.bPreventDefault = true;
+			};
 
 		return GraphController;
-    });
+	});

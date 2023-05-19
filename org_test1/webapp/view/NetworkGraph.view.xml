@@ -1,37 +1,30 @@
 <mvc:View controllerName="orgtest.controller.NetworkGraph"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="false"
     xmlns:m="sap.m"
     xmlns="sap.suite.ui.commons.networkgraph"
 	xmlns:layout="sap.suite.ui.commons.networkgraph.layout"
     xmlns:core="sap.ui.core">
     <m:Page id="page" title="{i18n>title}">
         <m:content>
-            <Graph enableWheelZoom="false"
-		   orientation="TopBottom"
-		   nodes="{/nodes}"
-		   lines="{/lines}"
-		 
-		   searchSuggest="suggest"
-		   search="search"
-		   id="graph">
-		<layoutAlgorithm>
-			<layout:LayeredLayout
-					mergeEdges="true"
-					nodePlacement="Simple"
-					nodeSpacing="40"/>
-		</layoutAlgorithm>
+            <Graph enableWheelZoom="false" orientation="TopBottom" nodes="{/nodes}" lines="{/lines}"
+		   searchSuggest="suggesst" search="search" id="graph">
+			<layoutAlgorithm>
+				<layout:LayeredLayout mergeEdges="true" nodePlacement="Simple" nodeSpacing="40"/>
+			</layoutAlgorithm>
 		<nodes>
-			<Node icon="sap-icon://action-settings"
+			
+			<Node 
 				  key="{id}"
 				  description="{title}"
 				  title="{title}"
 				  width="90"
-				  collapsed="{collapsed}"
+				  collapsed="false"
 				  attributes="{attributes}"
 				  showActionLinksButton="false"
 				  showDetailButton="false"
 				  descriptionLineSize="0"
 				  shape="Box">
+				
 				<customData>
 					<core:CustomData key="supervisor" value="{supervisor}"/>
 					<core:CustomData key="team" value="{team}"/>
@@ -45,11 +38,11 @@
 					<ElementAttribute label="{label}" value="{value}"/>
 				</attributes>
 				<!-- 이미지크기 -->
-				<image>
+				<!-- <image >
 					<NodeImage src="{src}"
 							   width="80"
 							   height="100"/>
-				</image>
+				</image> -->
 			</Node>
 		</nodes>
 		<!-- arrowOrientation 노드를 연결하는 선 -->
