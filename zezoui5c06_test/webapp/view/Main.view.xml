@@ -1,4 +1,6 @@
-<mvc:View controllerName="test0001.controller.Main" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.f">
+<mvc:View controllerName="zezoui5c06test.controller.Main" 
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m" xmlns:f="sap.f">
     <f:DynamicPage toggleHeaderOnTitleClick="false">
         <f:title>
             <f:DynamicPageTitle>
@@ -10,20 +12,19 @@
 
         <f:content>
             <VBox fitContainer="true">
-                <Table id="productTable"  items="{/Products}" class="sapFDynamicPageAlignContent" width="auto">
+                <Text text="{/zezo_bpSet/Bpcode}"></Text>
+                <Table id="productTable" inset="false" items="{/zezo_bpSet}" class="sapFDynamicPageAlignContent" width="auto">
                     <columns>
-                        <Column width="100%">
+                        <Column width="12em">
                             <Text text="Product No" />
-                        </Column>
-                        <Column width="100%">
                             <Text text="Product Name" />
                         </Column>
                     </columns>
                     <items>
                         <ColumnListItem type="Navigation" press=".onListItemPress">
                             <cells>
-                                <Text text="{Productno}" />
-                                <Text text="{Productname}" />
+                                <Text text="{Bpcode}" />
+                                <Text text="{Ceoname}" />
                             </cells>
                         </ColumnListItem>
                     </items>
