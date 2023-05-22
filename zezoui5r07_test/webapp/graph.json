@@ -20,6 +20,7 @@
 		{
 			"id": "Ninsei",
 			"title": "영업 본부",
+			"description": "Sales Team",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/male_GordonR.jpg",
 			"attributes": [
 				{
@@ -38,10 +39,11 @@
 		{
 			"id": "yoonji",
 			"title": "구매본부",
+			"description": "Purchasing Organization",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/male_GordonR.jpg",
 			"attributes": [
 				{
-					"label": 9,
+					"label": 2,
 					"value": ""
 				}
 			],
@@ -55,6 +57,7 @@
 		{
 			"id": "ara",
 			"title": "경영지원본부",
+			"description": "Production Organization",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/male_GordonR.jpg",
 			"attributes": [
 				{
@@ -72,6 +75,7 @@
 		{
 			"id": "10004001",
 			"title": "회계재무",
+			"description": "Financial Organization",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "ara",
 			"location": "Brno",
@@ -82,6 +86,7 @@
 		{
 			"id": "10003001",
 			"title": "원자재구매",
+			"description": "Raw Material Purchasing Team",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "yoonji",
 			"location": "Brno",
@@ -93,6 +98,7 @@
 		{
 			"id": "10003002",
 			"title": "부자재구매",
+			"description": "Sub Material Purchasing Team",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "yoonji",
 			"location": "Brno",
@@ -103,6 +109,7 @@
 		{
 			"id": "10001001",
 			"title": "국내 영업팀",
+			"description": "Domestic Sales Team",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "Ninsei",
 			"location": "Brno",
@@ -114,6 +121,7 @@
 		{
 			"id": "10001002",
 			"title": "해외 영업팀",
+			"description": "Overseas Sales Team",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "Ninsei",
 			"location": "Brno",
@@ -125,6 +133,7 @@
 		{
 			"id": "Ortmann",
 			"title": "생산 본부",
+			"description": "Production Organization",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/male_WallaceA.jpg",
 			"attributes": [
 				{
@@ -146,6 +155,7 @@
 		{
 			"id": "House",
 			"title": "인천공장",
+			"description": "Incheon Plant",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/male_EastJ.jpg",
 			"supervisor": "Ortmann",
 			"attributes": [
@@ -163,6 +173,7 @@
 		{
 			"id": "10002001",
 			"title": "생산팀",
+			"description": "Production Team",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_SpringS.jpg",
 			"supervisor": "House",
 			"location": "Brno",

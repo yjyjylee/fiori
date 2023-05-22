@@ -4,9 +4,11 @@
     xmlns="sap.suite.ui.commons.networkgraph"
 	xmlns:layout="sap.suite.ui.commons.networkgraph.layout"
     xmlns:core="sap.ui.core">
-    <m:Page id="page" title="{i18n>title}">
+    <m:Page id="page" title="Organization Chart" titleLevel="H1" >
         <m:content>
-		<Graph enableWheelZoom="false"
+		<m:Text text="Organization Chart"></m:Text>
+		<Graph 
+		backgroundColor="White"
 		   orientation="TopBottom"
 		   nodes="{/nodes}"
 		   lines="{/lines}"

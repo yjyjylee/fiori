@@ -1,10 +1,93 @@
 <mvc:View controllerName="zezoui5r07test.controller.Detail"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="false"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+	xmlns:u="sap.ui.unified">
     <Page id="page" title="Detail" showNavButton="true" navButtonPress="onNavButtonPress">
-        <content>
+        <!-- <content>
             <Input value="{DetailModel>/data/Pernr}"></Input>
             <Button text="test" press="onPress"></Button>
+        </content> -->
+        <content>
+            <HBox class="sapUiMediumMargin" justifyContent ='Center'>
+                <VBox width="50%">
+                    <Image  src="/image/1.png" width="80%" height="80%"/>
+                    <!-- <u:FileUploader
+                        id="idCreateFileUploader"
+                        name="myFileUpload"
+                        uploadUrl="upload/"
+                        tooltip="Upload your file to the local server"
+                        uploadComplete="handleUploadComplete"/>s
+                    <Button
+                        text="Upload File"
+                        press="handleUploadPress"/> -->
+                </VBox>
+                <VBox width="50%">
+                    <Label text="사번" design="Bold" />
+                    <Input value="{DetailModel>/data/Pernr}" type="Number" editable="false" />
+                    <Label text="이름" />
+                    <Input value="{DetailModel>/data/Name}" type="Text" editable="false" valueState="Error"/>
+                    <Label text="성별"/>
+                    <ComboBox selectedKey="{DetailModel>/data/Gender}" editable="false">
+                        <items>
+                            <core:Item text="남" key="1"/>
+                            <core:Item text="여" key="2"/>
+                        </items>
+                    </ComboBox>                    
+                    <Label text="부서" />
+                    <ComboBox id="idDeptSelection" selectedKey="{DetailModel>/data/Deptcode}" editable="false">
+                        <items>
+                            <core:Item text="본부" key="10000000"/>
+                            <core:Item text="국내영업팀" key="10001001"/>
+                            <core:Item text="해외영업팀" key="10001002"/>
+                            <core:Item text="생산팀 " key="10002001"/>
+                            <core:Item text="원자재구매팀" key="10003001"/>
+                            <core:Item text="부자재구매팀" key="10003002"/>
+                            <core:Item text="회계/재무팀" key="10004001"/>
+                        </items>
+                    </ComboBox>                     
+                    <Label text="직급" />
+                    <ComboBox id="idRankSelection" selectedKey="{DetailModel>/data/Rank}" editable="false">
+                        <items>
+                            <core:Item text="CEO" key="CEO"/>
+                            <core:Item text="총괄이사" key="총괄이사"/>
+                            <core:Item text="부장" key="부장"/>
+                            <core:Item text="차장 " key="차장"/>
+                            <core:Item text="과장" key="과장"/>
+                            <core:Item text="대리" key="대리"/>
+                            <core:Item text="사원" key="사원"/>
+                            <core:Item text="인턴" key="인턴"/>
+                        </items>
+                    </ComboBox>                      
+                    <Label text="연락처"/>
+                    <Input value="{DetailModel>/data/Tel}" type="Tel" editable="false"/>
+                    <Label text="이메일"/>
+                    <Input value="{DetailModel>/data/Email}" type="Email" editable="false"/>
+                    <Label text="입사일" />
+                    <DatePicker
+                        value="{
+                            'path':'DetailModel>/data/Joindate',
+                            'type':'sap.ui.model.type.Date',
+                            'formatOptions': {
+                                'pattern': 'yyyy-MM-dd'
+                            }
+                        }"
+                        editable="false"/>
+                    <Label text="탄생" />
+                    <DatePicker
+                        value="{
+                            'path':'DetailModel>/data/Birthdate',
+                            'type':'sap.ui.model.type.Date',
+                            'formatOptions': {
+                                'pattern': 'yyyy-MM-dd'
+                            }
+                        }"
+                        editable="false"/>
+                    <CheckBox selected="{= ${DetailModel>/data/Assdt} === 'Y' ? true : false}" text="승인권한" editable="false"/>    
+                    <CheckBox selected="{= ${DetailModel>/data/Delflag} === 'X' ? true : false}" text="퇴사여부" editable="false"/>
+                </VBox>
+            </HBox>
         </content>
     </Page>
 </mvc:View>
