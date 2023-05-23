@@ -5,26 +5,49 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="Main View" />
+                    <Title text="Register Business Partner" level="H1"/>
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
-
         <f:content>
             <VBox fitContainer="true">
-                <Text text="{/zezo_bpSet/Bpcode}"></Text>
-                <Table id="productTable" inset="false" items="{/zezo_bpSet}" class="sapFDynamicPageAlignContent" width="auto">
+                <Table id="productTable" inset="false" 
+                 items="{
+							path: '/zezo_bpSet',
+                            sorter: [{
+                            path : 'Bpcode',
+                            ascending : true
+                            }]
+
+						}"
+                class="sapFDynamicPageAlignContent" width="auto">
+                <headerToolbar>
+					<OverflowToolbar>
+						<ToolbarSpacer/>
+						<Button icon="sap-icon://add" text="ADD" press="onAdd" type="Emphasized"/>
+					</OverflowToolbar>
+		        </headerToolbar>
                     <columns>
-                        <Column width="12em">
-                            <Text text="Product No" />
-                            <Text text="Product Name" />
+                        <Column hAlign="Begin">
+                            <ObjectIdentifier title="거래처코드"  />
+                        </Column>
+                         <Column hAlign="Center" >
+                            <ObjectIdentifier title="회사명"  />
+                        </Column>
+                        <Column hAlign="End">
+                            <ObjectIdentifier title="거래처유형"  />
                         </Column>
                     </columns>
                     <items>
                         <ColumnListItem type="Navigation" press=".onListItemPress">
                             <cells>
-                                <Text text="{Bpcode}" />
-                                <Text text="{Ceoname}" />
+                                <ObjectIdentifier  title="{Bpcode}" />
+                            </cells>
+                            <cells>
+                                <ObjectIdentifier  title="{Bpname}"/>
+                            </cells>
+                            <cells>
+                                <ObjectIdentifier  title="{Bptype}"/>
                             </cells>
                         </ColumnListItem>
                     </items>

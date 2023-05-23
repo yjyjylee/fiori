@@ -13,8 +13,27 @@ sap.ui.define([
             onInit: function () {
                 this.oRouter = this.getOwnerComponent().getRouter();
             },
+            onAdd : function(){
+              var oDialog = this.byId("InputDialog");
+                if (oDialog) {
+                    oDialog.open();
+                    return;
+                }
+                this.loadFragment({
+                    name: "zezoui5c06test.view.fragment.Input"
+                }).then(function (oDialog) {
+                    oDialog.open();
+                }, this);
+            },
+            onClose: function () {
+              var oDialog = this.byId("InputDialog");
+
+              oDialog.close();
+            },
+
             onListItemPress: function (oEvent) {
-          
+              // debugger;
+              var skey = oEvent.getSource().mAggregations.cells[0].mProperties.title;
                 this.oView
                   .getParent()
                   .getParent()
@@ -22,7 +41,7 @@ sap.ui.define([
                 //library에서 TwoColumnsMidExpanded설정.
                 this.oRouter.navTo("Detail", {
                   layout: library.LayoutType.TwoColumnsMidExpanded,
-                  key: 1
+                  key: skey
                 });
               }
         });

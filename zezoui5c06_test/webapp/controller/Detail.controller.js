@@ -10,23 +10,74 @@ sap.ui.define([
 
         return Controller.extend("zezoui5c06test.controller.Detail", {
             onInit: function () {
-                this._setChartInView();
+                this.getView().setModel(new JSONModel(),"DetailModel")
+                var oRouter = this.getOwnerComponent().getRouter();
+                oRouter.getRoute("Detail").attachPatternMatched(this._onPatternMatched, this)
             },
-            _setChartInView: function() {
-                var oData = {
-                    list : [
-                        {name:'국어', rate: '100', cost: '10'},
-                        {name:'영어', rate: '50', cost: '22'},
-                        {name:'수학', rate: '80', cost: '66'},
-                        {name:'도덕', rate: '80', cost: '44'},
-                        {name:'체육', rate: '70', cost: '33'}
-                    ]
-                };
-                var chartUid = this.byId("idViewChart").getVizUid();
+            handleClose: function(){
+                this.oRouter = this.getOwnerComponent().getRouter();
+			    this.oModel = this.getOwnerComponent().getModel();
+                var sNextLayout = this.oModel.getProperty("/actionButtonsInfo/midColumn/closeColumn");
+			    this.oRouter.navTo("RouteMain", {layout: sNextLayout});
+            },
+            //delflag 업데이트
+            delete : function(){
+                this.oModel = this.getOwnerComponent().getModel();
+                this.oDetailModel = this.getView().getModel('DetailModel');
+                let jsonData = this.oDetailModel.getProperty("/data");
+                jsonData.Delflag = 'X';
+                debugger; //let oData = this.oMainModel.getData();이거랑 똑같음
+                let sFullPath = this.oModel.createKey("/zezo_bpSet", {
+                    Bpcode :  jsonData.Bpcode
+                });
 
-                this.getView().setModel(new JSONModel(oData), "view");
+                var oFilter2 = new sap.ui.model.Filter('Bpcode', 'EQ', jsonData.Bpcode);
+                this.oModel.update(sFullPath, jsonData, {
+                    success : function() {
+                        this.oModel = this.getOwnerComponent().getModel();
+                        sap.m.MessageToast.show("변경완.");
+                        oModel.read("/zezo_bpSet",{ filters: [oFilter2]});
+                    }.bind(this)
+                });
                 
-                this.byId("idViewPopover").connect(chartUid);
-            }
+            },
+
+            _onPatternMatched: function (oEvent) {
+                var oView = this.getView();
+                // oEvent.getParameters().arguments; 이거랑 똑같음.
+                var oArgu = oEvent.getParameter("arguments");           
+                // debugger;
+                var oModel = oView.getModel(); //Northwind Odata Model
+                var oFilter = new sap.ui.model.Filter('Bpcode', 'EQ', oArgu.key); // filter(필드이름, 조건, 값)
+                // console.log(oArgu); // { key : 10248 }
+                //강사님 코드
+                var oDetailModel = this.getView().getModel('DetailModel');
+
+                oModel.read("/zezo_bpSet", {
+                    filters: [oFilter],
+                    //내가 짠 코드
+                    // success: function (oReturn) {
+                    //     debugger;
+                    //     console.log(oReturn.results[0]);
+                    //     oDetail.setProperty("/title/OrderID",oReturn.results[0]['OrderID'])
+                    //     oDetail.setProperty("/title/City", oReturn.results[0]['Customer']['City']);
+                    //     oDetail.setProperty("/title/Address", oReturn.results[0]['Employee']['Address']);
+                    // },
+                    //강사님 코드
+                    success: function (aaa) {
+                        // debugger;
+                        oView.setBusy(false);
+                        oDetailModel.setProperty("/data",aaa.results[0])
+                        //여기서 'data' 라는 이름이 만들어짐
+                    }.bind(this),
+
+                    error: function () {
+                        oView.setBusy(false);
+                        sap.m.MessageToast('에러발생');
+                    }
+                });
+
+                // console.log("pattern Matched function");
+            },
         });
     });

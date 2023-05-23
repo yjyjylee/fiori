@@ -1,4 +1,7 @@
 /* Enter your custom styles here */
-#__label0{
+#__label4{
     color:deeppink;
+}
+.yellowCell {
+    background-color: #FFFF66 !important;
 }

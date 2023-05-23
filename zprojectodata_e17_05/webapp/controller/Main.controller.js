@@ -44,6 +44,7 @@ sap.ui.define([
                 let sFullPath = this.oModel.createKey("/Products", {
                     Productno :  jsonData.Productno
                 });
+                debugger;
                 //sFullPath => "/Products(Productno=111, ab=123)" 문자열 형태로 들어감. (ab=~~ -> 이건 키 여러개 줄때~)
                 //key값을 메소드 쓰지 않고 "/Products(Productno="+변수+", ab="+변수+")" 이런식으로 써도 된다
                 this.oModel.update(sFullPath, jsonData, {

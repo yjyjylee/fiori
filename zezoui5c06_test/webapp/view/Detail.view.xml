@@ -1,44 +1,268 @@
 <mvc:View controllerName="zezoui5c06test.controller.Detail"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m"
-    xmlns:viz="sap.viz.ui5.controls"
-    xmlns:viz.data="sap.viz.ui5.data"
-    xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds">
-    <Page id="page" title="{i18n>title}">
-        <content>
-            <viz:Popover id="idViewPopover"/>
-            <viz:VizFrame id="idViewChart" 
-                            vizType="stacked_bar" 
-                            width="100%" 
-                            height="100%"
-                            vizProperties="{
-                                'title' : { text : 'My Chart', visible : true },
-                                'plotArea' : {
-                                    drawingEffect: 'glossy',
-                                    colorPalette:['#86E57F', '#F2CB61']
-                                }
-                            }">
-                <viz:dataset>
-                    <viz.data:FlattenedDataset data="{view>/list}">
-                        <viz.data:dimensions>
-                            <viz.data:DimensionDefinition name="과목" value="{view>name}" />
-                        </viz.data:dimensions>
+height="100%"
+		xmlns="sap.uxap"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:m="sap.m"
+		xmlns:f="sap.f"
+        xmlns:core="sap.ui.core"
+        xmlns:main="sap.ui.webc.main"
+		xmlns:form="sap.ui.layout.form">
 
-                        <viz.data:measures>
-                            <viz.data:MeasureDefinition name="점수" value="{view>rate}" />
-                            <viz.data:MeasureDefinition name="점수2" value="{view>cost}" />
-                        </viz.data:measures>
-                    </viz.data:FlattenedDataset>
-                </viz:dataset>
+	<ObjectPageLayout id="ObjectPageLayout"
+					 showTitleInHeaderContent="true"
+					alwaysShowContentHeader="false"
+					preserveHeaderStateOnScroll="false"
+					headerContentPinnable="true"
+					isChildPage="true"
+					upperCaseAnchorBar="false">
+				<headerTitle>
+					<ObjectPageDynamicHeaderTitle>
+						<expandedHeading>
+                            <m:VBox>
+                                <m:Title text="Detail Information" wrapping="true" titleStyle="H1"/>
+                                <m:Title text="{DetailModel>/data/Bpname}" wrapping="true" titleStyle="H1"/>
+                            </m:VBox>
+							
+						</expandedHeading>
 
-                <viz:feeds>
-                    <!-- categoryAxis, valueAxis / color, size -->
-                    <viz.feeds:FeedItem type="Dimension" uid="categoryAxis" values="과목" />
-                    <viz.feeds:FeedItem type="Measure" uid="valueAxis" values="점수" />
-                    <viz.feeds:FeedItem type="Measure" uid="valueAxis" values="점수2" />
-                </viz:feeds>
-            </viz:VizFrame>
+						<snappedHeading>
+							<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
+								<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
+                                    <m:VBox class="sapUiSmallMarginEnd"> 
+                                        <main:Avatar icon="{=${DetailModel>/data/Delflag} === 'X' ? 'sys-cancel-2' : 'sys-enter'}" 
+                                        nsize="XL"  colorScheme="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" shape="Square"/>
+                                    </m:VBox>
+									<m:Title text="{DetailModel>/data/Bpname}" wrapping="true" class="sapUiTinyMarginEnd"/>
+								</m:FlexBox>
+							</m:FlexBox>
+						</snappedHeading>
 
-        </content>
-    </Page>
+						<navigationActions>
+							<!-- <m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="handleFullScreen" id="enterFullScreenBtn" tooltip="Enter Full Screen Mode" visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://exit-full-screen" press="handleExitFullScreen" id="exitFullScreenBtn" tooltip="Exit Full Screen Mode" visible="{= ${/actionButtonsInfo/midColumn/exitFullScreen} !== null }"/> -->
+							<m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="handleClose"  tooltip="Close middle column" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+						</navigationActions>
+
+						<actions>
+							<!-- <m:Button text="Delete" type="Reject"/> -->
+						</actions>
+
+					</ObjectPageDynamicHeaderTitle>
+				</headerTitle>
+
+				<headerContent>
+					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+						<m:VBox class="sapUiMediumMarginEnd"> 
+                            <main:Avatar icon="{=${DetailModel>/data/Delflag} === 'X' ? 'sys-cancel-2' : 'sys-enter'}" nsize="XL" 
+                            colorScheme="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" shape="Square" />
+                        </m:VBox>
+						<m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label text="거래처코드" textAlign="Center"/>
+							<m:Text text="{DetailModel>/data/Bpcode}"/>
+						</m:VBox>
+						<m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label text="거래처유형" textAlign="Center"/>
+							<m:Text text="{DetailModel>/data/Bptype}"/>
+						</m:VBox>
+                        <m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label text="업종" textAlign="Center"/>
+							<m:Text text="{DetailModel>/data/Category}" textAlign="Center"/>
+						</m:VBox>
+						<m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label text="사업자등록번호" textAlign="Center"/>
+							<m:Text text="{DetailModel>/data/Brnum}"/>
+						</m:VBox>
+                        <m:ToolbarSpacer width="52px"></m:ToolbarSpacer>
+                        <m:VBox width="15%" justifyContent="End" class="sapUiSmallMarginEnd">
+							<!-- <m:Label text="거래여부" textAlign="Center"/> -->
+							<m:Button text="Delete" type="Reject" press="delete"/>
+						</m:VBox>
+					</m:FlexBox>
+				</headerContent>
+
+		<sections>
+			<ObjectPageSection title="대표자정보">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+							<form:SimpleForm
+								editable="false"
+								layout="GridLayout"
+                                singleContainerFullSize="false"
+                                adjustLabelSpan="false"
+								labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="2"
+                                columnsL="2"
+                                columnsM="2">
+								<form:content>
+                                    <m:HBox height="11.5px" class="sapUiLargeMarginBegin">
+									<m:Label class="sapUiSmallMarginBegin" text="대표자명 : "/>
+                                    <m:Text class="sapUiSmallMarginBegin" text="{DetailModel>/data/Ceoname}"/>
+                                    </m:HBox>
+									<m:Label text="사업자등록번호"/>
+									<m:Text text="{DetailModel>/data/Brnum}"/>
+									<m:Label text="업종"/>
+									<m:Text text="{DetailModel>/data/Category}"/>
+								</form:content>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+
+			<ObjectPageSection title="연락처정보">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+                        <m:HBox class="sapUiSmallMargin">
+							<form:SimpleForm
+								editable="false"
+								layout="GridLayout"
+                                singleContainerFullSize="false"
+                                adjustLabelSpan="false"
+								labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="2"
+                                columnsL="2"
+                                columnsM="2">
+								<form:content>
+									<m:Label text="담당자명" />
+                                    <m:Text  text="{DetailModel>/data/Contname}"/>
+									<m:Label text="담당자연락처"/>
+									<m:Text text="{DetailModel>/data/Conttel}"/>
+									<m:Label text="담당자메일"/>
+									<m:Text text="{DetailModel>/data/Contmail}"/>
+								</form:content>
+							</form:SimpleForm>
+                            </m:HBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+            <ObjectPageSection title="은행정보">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+                         <m:HBox class="sapUiSmallMargin">
+							<form:SimpleForm
+								editable="false"
+								layout="GridLayout"
+                                singleContainerFullSize="false"
+                                adjustLabelSpan="false"
+								labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="2"
+                                columnsL="2"
+                                columnsM="2">
+								<form:content>
+									<m:Label text="예금주" />
+                                    <m:Text  text="{DetailModel>/data/Accntholder}"/>
+									<m:Label text="계좌번호"/>
+									<m:Text text="{DetailModel>/data/Bankaccnt}"/>
+									<m:Label text="은행코드"/>
+									<m:Text text="{DetailModel>/data/Bankcode}"/>
+                                    <m:Label text="통화"/>
+									<m:Text text="{DetailModel>/data/Currency}"/>
+								</form:content>
+							</form:SimpleForm>
+                            </m:HBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+            <ObjectPageSection title="주소정보">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+                        <m:HBox class="sapUiSmallMargin">
+							<form:SimpleForm
+								editable="false"
+								layout="GridLayout"
+                                singleContainerFullSize="false"
+                                adjustLabelSpan="false"
+								labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="2"
+                                columnsL="2"
+                                columnsM="2">
+								<form:content>
+									<m:Label text="국가" />
+                                    <m:Text  text="{DetailModel>/data/Country}"/>
+									<m:Label text="우편번호"/>
+									<m:Text text="{DetailModel>/data/Postcode}"/>
+									<m:Label text="상세주소"/>
+									<m:Text text="{DetailModel>/data/Address}"/>
+								</form:content>
+							</form:SimpleForm>
+                            </m:HBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+            <ObjectPageSection title="거래조건">
+				<subSections>
+					<ObjectPageSubSection>
+						<blocks>
+                         <m:HBox class="sapUiSmallMargin">
+							<form:SimpleForm
+								editable="false"
+								layout="GridLayout"
+                                singleContainerFullSize="false"
+                                adjustLabelSpan="false"
+								labelSpanXL="4"
+                                labelSpanL="4"
+                                labelSpanM="12"
+                                labelSpanS="12"
+                                emptySpanXL="0"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                emptySpanS="0"
+                                columnsXL="2"
+                                columnsL="2"
+                                columnsM="2">
+								<form:content>
+									<m:Label text="결제조건" />
+                                    <m:Text  text="{=${DetailModel>/data/Paymtco} === '' ? 'No Data' : ${DetailModel>/data/Paymtco}}"/>
+                                    <m:Label text="운송조건" />
+                                    <m:Text  text="{=${DetailModel>/data/Transco} === '' ? 'No Data' : ${DetailModel>/data/Transco}}"/>
+									<m:Label text="인코텀즈"/>
+									<m:Text text="{DetailModel>/data/Incoterms}"/>
+									<m:Label text="결제일"/>
+									<m:Text text="{DetailModel>/data/Pymtdate}"/>
+                                    <m:Label text="조정계정"/>
+									<m:Text text="{DetailModel>/data/Arap}"/>
+								</form:content>
+							</form:SimpleForm>
+                            </m:HBox>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+	</ObjectPageLayout>
 </mvc:View>

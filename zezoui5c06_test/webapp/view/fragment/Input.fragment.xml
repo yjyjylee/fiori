@@ -1,0 +1,14 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+    xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
+    <Dialog id="InputDialog" title="거래처등록" draggable="true" resizable="true">
+        <content>
+          <Text text="test"></Text>
+        </content>
+
+        <endButton>
+            <!-- .은 현재 위치 라는 의미 -->
+            <Button text="닫기" press=".onClose">
+            </Button>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

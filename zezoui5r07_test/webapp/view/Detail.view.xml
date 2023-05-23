@@ -24,7 +24,7 @@
                         press="handleUploadPress"/> -->
                 </VBox>
                 <VBox width="50%">
-                    <Label text="사번" design="Bold" />
+                    <Label text="사번" design="Bold"/>
                     <Input value="{DetailModel>/data/Pernr}" type="Number" editable="false" />
                     <Label text="이름" />
                     <Input value="{DetailModel>/data/Name}" type="Text" editable="false" valueState="Error"/>
