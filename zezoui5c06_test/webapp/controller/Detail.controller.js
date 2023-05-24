@@ -23,20 +23,23 @@ sap.ui.define([
             //delflag 업데이트
             delete : function(){
                 this.oModel = this.getOwnerComponent().getModel();
-                this.oDetailModel = this.getView().getModel('DetailModel');
-                let jsonData = this.oDetailModel.getProperty("/data");
+                // debugger;
+                var oDetailModel = this.getView().getModel('DetailModel');
+                let jsonData = oDetailModel.getProperty("/data");
                 jsonData.Delflag = 'X';
-                debugger; //let oData = this.oMainModel.getData();이거랑 똑같음
+                // debugger; //let oData = this.oMainModel.getData();이거랑 똑같음
                 let sFullPath = this.oModel.createKey("/zezo_bpSet", {
                     Bpcode :  jsonData.Bpcode
                 });
 
                 var oFilter2 = new sap.ui.model.Filter('Bpcode', 'EQ', jsonData.Bpcode);
+                // this.oPModel = this.getView().getParent().getParent().getModel();
                 this.oModel.update(sFullPath, jsonData, {
-                    success : function() {
-                        this.oModel = this.getOwnerComponent().getModel();
-                        sap.m.MessageToast.show("변경완.");
-                        oModel.read("/zezo_bpSet",{ filters: [oFilter2]});
+                    success : function(rrr) {
+                        // debugger;
+                        
+                        sap.m.MessageToast.show("거래상태가 변경되었습니다");
+                        oDetailModel.setProperty('/data/Delflag','X');
                     }.bind(this)
                 });
                 
@@ -46,7 +49,6 @@ sap.ui.define([
                 var oView = this.getView();
                 // oEvent.getParameters().arguments; 이거랑 똑같음.
                 var oArgu = oEvent.getParameter("arguments");           
-                // debugger;
                 var oModel = oView.getModel(); //Northwind Odata Model
                 var oFilter = new sap.ui.model.Filter('Bpcode', 'EQ', oArgu.key); // filter(필드이름, 조건, 값)
                 // console.log(oArgu); // { key : 10248 }

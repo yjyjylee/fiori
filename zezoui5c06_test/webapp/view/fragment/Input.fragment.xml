@@ -1,14 +1,43 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core"
-    xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
-    <Dialog id="InputDialog" title="거래처등록" draggable="true" resizable="true">
+    xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+    <Dialog id="InputDialog" title="신규거래처등록" draggable="true" resizable="true" contentHeight="50%">
         <content>
-          <Text text="test"></Text>
-        </content>
+            <VBox height="30%" >
+                <f:SimpleForm id="SimpleFormDisplayColumn_oneGroup" editable="false" layout="ResponsiveGridLayout" >
+                    <f:content>
+                        <Label text="거래처코드" ></Label>
+                        <Input id="addCode"   placeholder="5자리" value="{ 'path' : 'Input>/Bpcode',
+                        'constraints' : {
+                            minLength: 5,
+                            maxLength: 5
+                        } }" type="Number" ></Input>
+                        <Label text="거래처명" ></Label>
+                        <Input id="addName"  value="{Input>/Bpname}" ></Input>
+                        <Label text="사업자등록번호"  ></Label>
+                        <Input id="addNum"  value="{Input>/Brnum}"></Input>
 
+                        <Label text="대표자명" ></Label>
+                        <Input id="addCEO" value="{Input>/Ceoname}"></Input>
+                        <Label text="업종" ></Label>
+                        <Input id="addCate" value="{Input>/Category}" ></Input>
+                        <Label text="통화"  ></Label>
+                        <Input id="addCurr" value="{Input>/Currency}" ></Input>
+                
+                        <Label text="담당자명" ></Label>
+                        <Input id="addCon" value="{Input>/Contname}"></Input>
+                        <Label text="담당자연락처" ></Label>
+                        <Input id="addCont"  value="{Input>/Conttel}"></Input>
+                        <Label text="담당자메일" ></Label>
+                        <Input id="addConm" value="{Input>/Contmail}" ></Input>
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="저장" press="onSave"></Button>
+        </beginButton>
         <endButton>
-            <!-- .은 현재 위치 라는 의미 -->
-            <Button text="닫기" press=".onClose">
-            </Button>
+            <Button text="닫기" press=".onClose"></Button>
         </endButton>
     </Dialog>
 </core:FragmentDefinition>

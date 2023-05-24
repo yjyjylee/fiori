@@ -1,17 +1,17 @@
 <mvc:View controllerName="zezoui5c06test.controller.Main" 
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m" xmlns:f="sap.f">
-    <f:DynamicPage toggleHeaderOnTitleClick="false">
+    xmlns="sap.m" xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:tnt="sap.tnt">
+    <f:DynamicPage toggleHeaderOnTitleClick="true"  >
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="Register Business Partner" level="H1"/>
+                    <Title text="Register Business Partner" />
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
         <f:content>
-            <VBox fitContainer="true">
-                <Table id="productTable" inset="false" 
+            <VBox fitContainer="false">
+                <Table id="bpTable" inset="false" 
                  items="{
 							path: '/zezo_bpSet',
                             sorter: [{
@@ -29,6 +29,9 @@
 		        </headerToolbar>
                     <columns>
                         <Column hAlign="Begin">
+                            <ObjectIdentifier title="거래여부"  />
+                        </Column>
+                        <Column hAlign="Center">
                             <ObjectIdentifier title="거래처코드"  />
                         </Column>
                          <Column hAlign="Center" >
@@ -41,13 +44,19 @@
                     <items>
                         <ColumnListItem type="Navigation" press=".onListItemPress">
                             <cells>
-                                <ObjectIdentifier  title="{Bpcode}" />
+                                <core:Icon src="{=${Delflag} === 'X' ? 'sys-cancel-2' : 'sys-enter'}" 
+                                color="{=${Delflag} === 'X' ? '#FF0000' : '#1DDB16'}" />
+                            </cells>
+                            <cells>
+                                <ObjectIdentifier  title="{Bpcode}" icon="sap-icon://decision" />
                             </cells>
                             <cells>
                                 <ObjectIdentifier  title="{Bpname}"/>
                             </cells>
                             <cells>
                                 <ObjectIdentifier  title="{Bptype}"/>
+                                <!-- <tnt:InfoLabel id="il5" text="{Bptype}" renderMode="Loose" colorScheme="5" /> -->
+                                <!-- <Text text= "{Bptype}"> </Text> -->
                             </cells>
                         </ColumnListItem>
                     </items>

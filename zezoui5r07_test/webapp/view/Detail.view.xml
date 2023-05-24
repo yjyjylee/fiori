@@ -12,7 +12,7 @@
         <content>
             <HBox class="sapUiMediumMargin" justifyContent ='Center'>
                 <VBox width="50%">
-                    <Image  src="/image/1.png" width="80%" height="80%"/>
+                    <Image  src="/image/{DetailModel>/data/Pernr}.png" width="80%" height="80%"/>
                     <!-- <u:FileUploader
                         id="idCreateFileUploader"
                         name="myFileUpload"

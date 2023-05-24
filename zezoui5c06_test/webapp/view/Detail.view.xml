@@ -51,32 +51,34 @@ height="100%"
 				</headerTitle>
 
 				<headerContent>
-					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
+					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
 						<m:VBox class="sapUiMediumMarginEnd"> 
                             <main:Avatar icon="{=${DetailModel>/data/Delflag} === 'X' ? 'sys-cancel-2' : 'sys-enter'}" nsize="XL" 
                             colorScheme="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" shape="Square" />
                         </m:VBox>
-						<m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
+						<m:VBox width="13%" justifyContent="Center" class="sapUiSmallMarginEnd">
 							<m:Label text="거래처코드" textAlign="Center"/>
 							<m:Text text="{DetailModel>/data/Bpcode}"/>
 						</m:VBox>
-						<m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
-							<m:Label text="거래처유형" textAlign="Center"/>
-							<m:Text text="{DetailModel>/data/Bptype}"/>
-						</m:VBox>
-                        <m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
-							<m:Label text="업종" textAlign="Center"/>
-							<m:Text text="{DetailModel>/data/Category}" textAlign="Center"/>
+						<m:VBox width="13%" justifyContent="Center" class="sapUiSmallMarginEnd" alignItems="Inherit">
+							<m:Label text="거래처유형" />
+							<m:Text text="{DetailModel>/data/Bptype}" textAlign="Begin"/>
 						</m:VBox>
 						<m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
 							<m:Label text="사업자등록번호" textAlign="Center"/>
 							<m:Text text="{DetailModel>/data/Brnum}"/>
 						</m:VBox>
-                        <m:ToolbarSpacer width="52px"></m:ToolbarSpacer>
-                        <m:VBox width="15%" justifyContent="End" class="sapUiSmallMarginEnd">
-							<!-- <m:Label text="거래여부" textAlign="Center"/> -->
-							<m:Button text="Delete" type="Reject" press="delete"/>
+                        <m:VBox width="10%" justifyContent="Center" class="sapUiSmallMarginEnd">
+							<m:Label text="업종" textAlign="Center"/>
+							<m:Text text="{DetailModel>/data/Category}" textAlign="Center"/>
+							
 						</m:VBox>
+						<m:Button text="Delete" type="Reject" icon="sap-icon://delete" press="delete"/>
+                        <!-- <m:ToolbarSpacer width="52px"></m:ToolbarSpacer> -->
+                        <!-- <m:VBox width="10%" justifyContent="End" class="sapUiSmallMarginEnd">
+							<m:Label text="거래여부" textAlign="Center"/>
+							
+						</m:VBox> -->
 					</m:FlexBox>
 				</headerContent>
 
@@ -100,12 +102,10 @@ height="100%"
                                 emptySpanS="0"
                                 columnsXL="2"
                                 columnsL="2"
-                                columnsM="2">
+                                columnsM="1">
 								<form:content>
-                                    <m:HBox height="11.5px" class="sapUiLargeMarginBegin">
-									<m:Label class="sapUiSmallMarginBegin" text="대표자명 : "/>
-                                    <m:Text class="sapUiSmallMarginBegin" text="{DetailModel>/data/Ceoname}"/>
-                                    </m:HBox>
+									<m:Label text="대표자명"/>
+                                    <m:Text text="{DetailModel>/data/Ceoname}"/>
 									<m:Label text="사업자등록번호"/>
 									<m:Text text="{DetailModel>/data/Brnum}"/>
 									<m:Label text="업종"/>

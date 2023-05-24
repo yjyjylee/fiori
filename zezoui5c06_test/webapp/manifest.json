@@ -91,7 +91,7 @@
         "viewType": "XML",
         "async": true,
         "viewPath": "zezoui5c06test.view",
-        "controlAggregation": "pages",
+        "controlAggregation": "page",
         "controlId": "fcl",
         "clearControlAggregation": false
       },
