@@ -1,7 +1,7 @@
 /**
  * eslint-disable @sap/ui5-jsdocs/no-jsdoc
  */
-
+var _rootPath = jQuery.sap.getModulePath("zezoui5r07test");
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",

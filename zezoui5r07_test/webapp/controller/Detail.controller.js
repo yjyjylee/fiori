@@ -10,6 +10,10 @@ sap.ui.define([
 
         return Controller.extend("zezoui5r07test.controller.Detail", {
             onInit: function () {
+                // var sImagePath = "/image/{DetailModel>/data/Pernr}.png";
+                // console.log(sImagePath);
+
+    
                 this.getView().setModel(new JSONModel(),"DetailModel")
                 var oRouter = this.getOwnerComponent().getRouter();
                 oRouter.getRoute("RouteDetail").attachPatternMatched(this._onPatternMatched,this)
@@ -25,6 +29,10 @@ sap.ui.define([
                 var oFilter = new sap.ui.model.Filter('Pernr', 'EQ', oArgu.key);
                 var oDetailModel = this.getView().getModel('DetailModel');
                 // debugger;
+                
+                if(_rootPath){
+                    this.byId("idImage").setSrc(_rootPath + `/image/${oArgu.key}.png`)
+                }
                 oModel.read("/zezo_empdepSet", {
                     
                     filters: [oFilter],

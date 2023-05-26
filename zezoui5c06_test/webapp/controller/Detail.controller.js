@@ -17,6 +17,7 @@ sap.ui.define([
             handleClose: function(){
                 this.oRouter = this.getOwnerComponent().getRouter();
 			    this.oModel = this.getOwnerComponent().getModel();
+                // debugger;
                 var sNextLayout = this.oModel.getProperty("/actionButtonsInfo/midColumn/closeColumn");
 			    this.oRouter.navTo("RouteMain", {layout: sNextLayout});
             },
@@ -26,20 +27,24 @@ sap.ui.define([
                 // debugger;
                 var oDetailModel = this.getView().getModel('DetailModel');
                 let jsonData = oDetailModel.getProperty("/data");
-                jsonData.Delflag = 'X';
+
+                if(jsonData.Delflag === 'X'){
+                    jsonData.Delflag =''
+                    oDetailModel.setProperty('/data/Delflag','');
+                }
+                else if(jsonData.Delflag === ''){
+                    jsonData.Delflag = 'X'
+                    oDetailModel.setProperty('/data/Delflag','X');
+                };
+
                 // debugger; //let oData = this.oMainModel.getData();이거랑 똑같음
                 let sFullPath = this.oModel.createKey("/zezo_bpSet", {
                     Bpcode :  jsonData.Bpcode
                 });
 
-                var oFilter2 = new sap.ui.model.Filter('Bpcode', 'EQ', jsonData.Bpcode);
-                // this.oPModel = this.getView().getParent().getParent().getModel();
                 this.oModel.update(sFullPath, jsonData, {
                     success : function(rrr) {
-                        // debugger;
-                        
                         sap.m.MessageToast.show("거래상태가 변경되었습니다");
-                        oDetailModel.setProperty('/data/Delflag','X');
                     }.bind(this)
                 });
                 
@@ -54,7 +59,7 @@ sap.ui.define([
                 // console.log(oArgu); // { key : 10248 }
                 //강사님 코드
                 var oDetailModel = this.getView().getModel('DetailModel');
-
+                // debugger;
                 oModel.read("/zezo_bpSet", {
                     filters: [oFilter],
                     //내가 짠 코드

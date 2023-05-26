@@ -15,6 +15,7 @@
         </f:title>
         <f:header>
             <f:DynamicPageHeader>
+                <Image src="https://mimgnews.pstatic.net/image/117/2023/04/16/202304161504524675_1_20230416152302340.jpg"></Image>
                 <fb:FilterBar id="filterBar" header="Search Filters" useToolbar="false"
                     search="onSearch" filterContainerWidth="10rem">
                     <fb:filterGroupItems>

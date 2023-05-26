@@ -19,8 +19,8 @@ height="100%"
 					<ObjectPageDynamicHeaderTitle>
 						<expandedHeading>
                             <m:VBox>
-                                <m:Title text="Detail Information" wrapping="true" titleStyle="H1"/>
-                                <m:Title text="{DetailModel>/data/Bpname}" wrapping="true" titleStyle="H1"/>
+                                <m:Text text="상세정보" wrapping="true" />
+                                <m:Title text="{DetailModel>/data/Bpname}" wrapping="true"/>
                             </m:VBox>
 							
 						</expandedHeading>
@@ -28,9 +28,14 @@ height="100%"
 						<snappedHeading>
 							<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
 								<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
-                                    <m:VBox class="sapUiSmallMarginEnd"> 
-                                        <main:Avatar icon="{=${DetailModel>/data/Delflag} === 'X' ? 'sys-cancel-2' : 'sys-enter'}" 
-                                        nsize="XL"  colorScheme="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" shape="Square"/>
+                                    <m:VBox class="sapUiSmallMarginEnd">
+									<core:Icon 
+                                	src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" 
+                                	color="{=${DetailModel>/data/Delflag} === 'X' ? '#FF7171' : '#6BEC62'}" />
+									<!-- <m:Avatar src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" displaySize="S" 
+                            		backgroundColor="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" displayShape="Square" /> -->
+                                        <!-- <main:Avatar icon="{=${DetailModel>/data/Delflag} === 'X' ? 'sys-cancel-2' : 'sys-enter'}" 
+                                        nsize="XL"  colorScheme="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" shape="Square"/> -->
                                     </m:VBox>
 									<m:Title text="{DetailModel>/data/Bpname}" wrapping="true" class="sapUiTinyMarginEnd"/>
 								</m:FlexBox>
@@ -52,17 +57,20 @@ height="100%"
 
 				<headerContent>
 					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
-						<m:VBox class="sapUiMediumMarginEnd"> 
-                            <main:Avatar icon="{=${DetailModel>/data/Delflag} === 'X' ? 'sys-cancel-2' : 'sys-enter'}" nsize="XL" 
-                            colorScheme="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" shape="Square" />
+						<m:VBox class="sapUiTinyMarginEnd"> 
+							<core:Icon 
+                                src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" 
+                                color="{=${DetailModel>/data/Delflag} === 'X' ? '#FF7171' : '#6BEC62'}" />
+                            <!-- <m:Avatar src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" displaySize="S" 
+                            backgroundColor="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" displayShape="Square" /> -->
                         </m:VBox>
-						<m:VBox width="13%" justifyContent="Center" class="sapUiSmallMarginEnd">
+						<m:VBox width="10%" justifyContent="Center" class="sapUiSmallMarginEnd">
 							<m:Label text="거래처코드" textAlign="Center"/>
 							<m:Text text="{DetailModel>/data/Bpcode}"/>
 						</m:VBox>
-						<m:VBox width="13%" justifyContent="Center" class="sapUiSmallMarginEnd" alignItems="Inherit">
+						<m:VBox width="13%" justifyContent="Center" class="sapUiSmallMarginEnd" >
 							<m:Label text="거래처유형" />
-							<m:Text text="{DetailModel>/data/Bptype}" textAlign="Begin"/>
+							<m:Text text="{DetailModel>/data/Bptype}" />
 						</m:VBox>
 						<m:VBox width="15%" justifyContent="Center" class="sapUiSmallMarginEnd">
 							<m:Label text="사업자등록번호" textAlign="Center"/>
@@ -73,10 +81,13 @@ height="100%"
 							<m:Text text="{DetailModel>/data/Category}" textAlign="Center"/>
 							
 						</m:VBox>
-						<m:Button text="Delete" type="Reject" icon="sap-icon://delete" press="delete"/>
+						<m:Button text="{=${DetailModel>/data/Delflag} === 'X' ? '거래활성화' : '거래중지'}" 
+						type="{=${DetailModel>/data/Delflag} === 'X' ? 'Accept' : 'Reject'}"
+						icon="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://decision' : 'sap-icon://cancel'}" press="delete"/>
                         <!-- <m:ToolbarSpacer width="52px"></m:ToolbarSpacer> -->
                         <!-- <m:VBox width="10%" justifyContent="End" class="sapUiSmallMarginEnd">
 							<m:Label text="거래여부" textAlign="Center"/>
+							
 							
 						</m:VBox> -->
 					</m:FlexBox>

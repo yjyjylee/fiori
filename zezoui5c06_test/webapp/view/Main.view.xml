@@ -44,17 +44,21 @@
                     <items>
                         <ColumnListItem type="Navigation" press=".onListItemPress">
                             <cells>
-                                <core:Icon src="{=${Delflag} === 'X' ? 'sys-cancel-2' : 'sys-enter'}" 
-                                color="{=${Delflag} === 'X' ? '#FF0000' : '#1DDB16'}" />
+                                <core:Icon 
+                                src="{=${Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" 
+                                color="{=${Delflag} === 'X' ? '#FF7171' : '#6BEC62'}" />
                             </cells>
                             <cells>
-                                <ObjectIdentifier  title="{Bpcode}" icon="sap-icon://decision" />
+                                <!-- <ObjectIdentifier  title="{Bpcode}"  /> -->
+                                <Text text="{Bpcode}"></Text>
                             </cells>
                             <cells>
-                                <ObjectIdentifier  title="{Bpname}"/>
+                                <!-- <ObjectIdentifier  title="{Bpname}"/> -->
+                                <Text text="{Bpname}"></Text>
                             </cells>
                             <cells>
-                                <ObjectIdentifier  title="{Bptype}"/>
+                                <!-- <ObjectIdentifier  title="{Bptype}"/> -->
+                                <Text text="{Bptype}"></Text>
                                 <!-- <tnt:InfoLabel id="il5" text="{Bptype}" renderMode="Loose" colorScheme="5" /> -->
                                 <!-- <Text text= "{Bptype}"> </Text> -->
                             </cells>

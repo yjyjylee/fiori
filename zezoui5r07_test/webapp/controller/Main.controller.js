@@ -28,6 +28,7 @@ sap.ui.define([
 			this._graph = this.byId("graph");
 			this.getView().setModel(this._oModel);
 
+		
 			this._setFilter();
 
 			this._graph.attachEvent("beforeLayouting", function (oEvent) {
@@ -268,17 +269,29 @@ sap.ui.define([
 			var oDialog = this.byId("idTable");
 			// debugger;
 			//3)한번 열리고 나면 그 때 부터는 if문 탐. controller에 붙여줘서.
-			if (oDialog) {
-				oDialog.open();
-				return;
-			}
-			//1)처음에는 여기를 탐. controller에 addDiaglog가 없어서 if문 안탐
-			this.loadFragment({
-				name: "zezoui5r07test.view.Table" //name에 경로 지정 폴더안에, 폴더안에 , dialog
-				//2)여기서 fragment load하고, this로 controller에 붙여줌.
-			}).then(function (oDialog) {
-				oDialog.open();
-			}, this); //this를 사용해서 해당 controller를 같이 넘겨줌.
+
+			if(!this.oFDialog){
+				this.oFDialog = Fragment.load({
+					id: this.getView().getId(),
+					name : "zezoui5r07test.view.Table",
+					type: "XML",
+					controller: this});}
+	  
+			   this.oFDialog.then(function(oDialog){
+				   this.getView().addDependent(oDialog);
+				   oDialog.open();
+			   }.bind(this));
+			// if (oDialog) {
+			// 	oDialog.open();
+			// 	return;
+			// }
+			// //1)처음에는 여기를 탐. controller에 addDiaglog가 없어서 if문 안탐
+			// this.loadFragment({
+			// 	name: "zezoui5r07test.view.Table" //name에 경로 지정 폴더안에, 폴더안에 , dialog
+			// 	//2)여기서 fragment load하고, this로 controller에 붙여줌.
+			// }).then(function (oDialog) {
+			// 	oDialog.open();
+			// }, this); //this를 사용해서 해당 controller를 같이 넘겨줌.
 		},
 
 

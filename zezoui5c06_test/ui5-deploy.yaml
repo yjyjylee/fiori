@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "2.6"
+metadata:
+  name: zezoui5c06test
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: http://edu.bgis.co.kr:8001/
+          client: "100"
+        app:
+          name: ZUIAPP_EZO_C06
+          description: (EZO Cosmetics Fiori APP_C06 )
+          package: ZBC_EZO_COSMETICS
+          transport: KYSK904512
+        exclude:
+          - /test/

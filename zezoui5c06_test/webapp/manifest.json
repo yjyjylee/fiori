@@ -7,7 +7,7 @@
     "applicationVersion": {
       "version": "0.0.1"
     },
-    "title": "{{appTitle}}",
+    "title": "{{신규 고객 등록}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {

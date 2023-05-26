@@ -4,6 +4,7 @@
     xmlns:t="sap.ui.table">
     <Page id="page" title="{i18n>title}">
         <content>
+            <Image src="https://mimgnews.pstatic.net/image/117/2023/04/16/202304161504524675_1_20230416152302340.jpg"></Image>
             <VBox class="sapUiLargeMargin">
                 <Text text="버튼을 클릭하면 아래 INPUT값이 랜덤으로 채워집니다"></Text>
                 <Input id="idInput" value ="{list>/text}" type="Number" change="onValueChange" ></Input>

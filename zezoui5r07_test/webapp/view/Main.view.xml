@@ -12,7 +12,7 @@
 		   orientation="TopBottom"
 		   nodes="{/nodes}"
 		   lines="{/lines}"
-		 
+		 	enableWheelZoom="false"
 		   searchSuggest="suggest"
 		   search="search"
 		   id="graph">

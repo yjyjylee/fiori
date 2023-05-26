@@ -1,34 +1,48 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core"
     xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
-    <Dialog id="InputDialog" title="신규거래처등록" draggable="true" resizable="true" contentHeight="50%">
+    <Dialog id="InputDialog" title="신규거래처등록" draggable="true" resizable="true" contentHeight="50%" afterClose="onAfter">
         <content>
             <VBox height="30%" >
                 <f:SimpleForm id="SimpleFormDisplayColumn_oneGroup" editable="false" layout="ResponsiveGridLayout" >
                     <f:content>
-                        <Label text="거래처코드" ></Label>
+                        <Label text="거래처코드" required="true"></Label>
                         <Input id="addCode"   placeholder="5자리" value="{ 'path' : 'Input>/Bpcode',
                         'constraints' : {
                             minLength: 5,
                             maxLength: 5
                         } }" type="Number" ></Input>
-                        <Label text="거래처명" ></Label>
-                        <Input id="addName"  value="{Input>/Bpname}" ></Input>
-                        <Label text="사업자등록번호"  ></Label>
-                        <Input id="addNum"  value="{Input>/Brnum}"></Input>
-
-                        <Label text="대표자명" ></Label>
+                        <Label text="거래처명" required="true"></Label>
+                        <HBox>
+                        <Input id="addName"  value="{Input>/Bpname}" placeholder="한글" width="95%"></Input> 
+                        <Input id="addNameENG"  value="{Bptxt>/Bpname}" placeholder="영문"  width="95%"></Input>
+                        </HBox>
+                        <Label text="사업자등록번호" required="true" ></Label>
+                        <Input id="addNum"  value="{Input>/Brnum}" placeholder="10자리"></Input>
+                        <Label text="대표자명" required="true"></Label>
                         <Input id="addCEO" value="{Input>/Ceoname}"></Input>
-                        <Label text="업종" ></Label>
-                        <Input id="addCate" value="{Input>/Category}" ></Input>
-                        <Label text="통화"  ></Label>
-                        <Input id="addCurr" value="{Input>/Currency}" ></Input>
-                
-                        <Label text="담당자명" ></Label>
+                        <Label text="업종" required="true" ></Label>
+                        <!-- <Input id="addCate" value="{Input>/Category}" ></Input> -->
+                        <Select id="idCateSelect" selectedKey="{Input>/Category}" width="50%">
+                                  <items>
+                                    <core:Item text="도매" key="도매"/>
+                                    <core:Item text="소매" key="소매"/>
+                                </items>
+                            </Select>
+                        <Label text="통화" required="true" ></Label>
+                            <Select id="idCurrSelect" selectedKey="{Input>/Currency}" width="50%">
+                                  <items>
+                                    <core:Item text="KRW" key="KRW"/>
+                                    <core:Item text="USD" key="USD"/>
+                                    <core:Item text="JPY" key="JPY"/>
+                                </items>
+                            </Select>
+                        <!-- <Input id="addCurr" value="{Input>/Currency}" ></Input> -->
+                        <Label text="담당자명" required="true"></Label>
                         <Input id="addCon" value="{Input>/Contname}"></Input>
-                        <Label text="담당자연락처" ></Label>
-                        <Input id="addCont"  value="{Input>/Conttel}"></Input>
-                        <Label text="담당자메일" ></Label>
-                        <Input id="addConm" value="{Input>/Contmail}" ></Input>
+                        <Label text="담당자연락처" required="true" ></Label>
+                        <Input id="addCont"  value="{Input>/Conttel}" placeholder="010-XXXX-XXXX"></Input>
+                        <Label text="담당자메일" required="true"></Label>
+                        <Input id="addConm" value="{Input>/Contmail}"  placeholder="@양식에 맞게 입력해주세요" ></Input>
                     </f:content>
                 </f:SimpleForm>
             </VBox>

@@ -4,7 +4,11 @@ xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
     <content>
         <t:Table 
 				id="empTable"
-				rows="{ path: 'FilterModel>/data'
+				rows="{ path: 'FilterModel>/data',
+				sorter: [{
+							path : 'Pernr',
+							descending : false
+									}]
 				}"
 				visibleRowCount="8"
                 selectionMode="Single"
