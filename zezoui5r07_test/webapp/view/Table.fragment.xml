@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" 
 xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
-<Dialog id="idTable" title="사원List" beforeOpen="onBeforeOpen" contentWidth="40%">
+<Dialog id="idTable" title="사원 목록" beforeOpen="onBeforeOpen" contentWidth="40%">
     <content>
         <t:Table 
 				id="empTable"
@@ -18,15 +18,21 @@ xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:l="sap.ui.layout">
 				selectionBehavior="RowOnly">
 				<t:columns>
 					<t:Column >
-						<ObjectIdentifier title="Pernr"  />
+						<ObjectIdentifier title="사번"  />
 						<t:template>
 							<Text text="{FilterModel>Pernr}" />
 						</t:template>
 					</t:Column>
                     <t:Column >
-						<ObjectIdentifier title="Name"/>  
+						<ObjectIdentifier title="이름"/>  
 						<t:template>
 							<Text text="{FilterModel>Name}" />
+						</t:template>
+					</t:Column>
+					  <t:Column  >
+						<ObjectIdentifier title="직급"/>  
+						<t:template>
+							<Text text="{FilterModel>Rank}" />
 						</t:template>
 					</t:Column>
 				</t:columns>

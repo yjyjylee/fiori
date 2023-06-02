@@ -2,8 +2,8 @@
 	"nodes": [
 		{
 			"id": "10000000",
-			"title": "(주) EZO Cosmetics",
-			"description": "본부(Headquarter)",
+			"title": "EZO Cosmetics",
+			"description": "Headquarter",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_IngallsB.jpg",
 			"attributes": [
 				{
@@ -38,7 +38,7 @@
 		
 		{
 			"id": "yoonji",
-			"title": "구매본부",
+			"title": "구매 본부",
 			"description": "Purchasing Organization",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/male_GordonR.jpg",
 			"attributes": [
@@ -56,7 +56,7 @@
 		},
 		{
 			"id": "ara",
-			"title": "경영지원본부",
+			"title": "경영지원 본부",
 			"description": "Production Organization",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/male_GordonR.jpg",
 			"attributes": [
@@ -85,7 +85,7 @@
 		},
 		{
 			"id": "10003001",
-			"title": "원자재구매",
+			"title": "원자재 구매",
 			"description": "Raw Material Purchasing Team",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "yoonji",
@@ -97,7 +97,7 @@
 	
 		{
 			"id": "10003002",
-			"title": "부자재구매",
+			"title": "부자재 구매",
 			"description": "Sub Material Purchasing Team",
 			"src": "./test-resources/sap/suite/ui/commons/demokit/images/people/female_WatsonM.jpg",
 			"supervisor": "yoonji",

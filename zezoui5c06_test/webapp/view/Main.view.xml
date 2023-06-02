@@ -1,5 +1,5 @@
 <mvc:View controllerName="zezoui5c06test.controller.Main" 
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:layout="sap.ui.layout"
     xmlns="sap.m" xmlns:f="sap.f" xmlns:core="sap.ui.core" xmlns:tnt="sap.tnt">
     <f:DynamicPage toggleHeaderOnTitleClick="true"  >
         <f:title>
@@ -9,11 +9,38 @@
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
+         <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <layout:HorizontalLayout allowWrapping="true">
+                    <!-- <Label text="거래처 :" /> -->
+                    <layout:VerticalLayout class="sapUiMediumMarginEnd">
+                        <Input id="input" showValueHelp="true" valueHelpRequest="onValueHelpRequest" valueHelpOnly="true"></Input>
+                    </layout:VerticalLayout>
+                    <layout:VerticalLayout>
+                        <!-- <Button text="조회" press="onSearch"></Button> -->
+                        <HBox justifyContent="Inherit" width="50px">
+                        <Button text="조회" press="onSearch" />
+                        </HBox>
+                    </layout:VerticalLayout>
+                    <layout:VerticalLayout>
+                        <!-- <Button text="새로고침" press="onRefresh"></Button> -->
+                        <HBox justifyContent="Inherit">
+                        <Button text="새로고침" press="onRefresh" icon="sap-icon://refresh" type="Accept" />
+                        </HBox>
+                    </layout:VerticalLayout>
+                </layout:HorizontalLayout>
+            </f:DynamicPageHeader>
+        </f:header>
         <f:content>
             <VBox fitContainer="false">
                 <Table id="bpTable" inset="false" 
                  items="{
 							path: '/zezo_bpSet',
+                            filters : [ {
+                            path : 'Bpcode',
+                            operator : 'BT',
+                            value1: '10000',
+                            value2: '20000' }],
                             sorter: [{
                             path : 'Bpcode',
                             ascending : true
@@ -24,7 +51,7 @@
                 <headerToolbar>
 					<OverflowToolbar>
 						<ToolbarSpacer/>
-						<Button icon="sap-icon://add" text="ADD" press="onAdd" type="Emphasized"/>
+						<Button icon="sap-icon://add" text="등록" press="onAdd" type="Emphasized"/>
 					</OverflowToolbar>
 		        </headerToolbar>
                     <columns>
@@ -38,14 +65,14 @@
                             <ObjectIdentifier title="회사명"  />
                         </Column>
                         <Column hAlign="End">
-                            <ObjectIdentifier title="거래처유형"  />
+                            <ObjectIdentifier title="사업자등록번호"  />
                         </Column>
                     </columns>
                     <items>
                         <ColumnListItem type="Navigation" press=".onListItemPress">
                             <cells>
                                 <core:Icon 
-                                src="{=${Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" 
+                                src="{=${Delflag} === 'X' ? 'sap-icon://cancel' : 'sap-icon://sys-enter'}" 
                                 color="{=${Delflag} === 'X' ? '#FF7171' : '#6BEC62'}" />
                             </cells>
                             <cells>
@@ -58,7 +85,7 @@
                             </cells>
                             <cells>
                                 <!-- <ObjectIdentifier  title="{Bptype}"/> -->
-                                <Text text="{Bptype}"></Text>
+                                <Text text="{Brnum}"></Text>
                                 <!-- <tnt:InfoLabel id="il5" text="{Bptype}" renderMode="Loose" colorScheme="5" /> -->
                                 <!-- <Text text= "{Bptype}"> </Text> -->
                             </cells>

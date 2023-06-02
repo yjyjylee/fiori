@@ -28,7 +28,7 @@ sap.ui.define([
                 // debugger;
                 var oFilter = new sap.ui.model.Filter('Pernr', 'EQ', oArgu.key);
                 var oDetailModel = this.getView().getModel('DetailModel');
-                // debugger;
+                debugger;
                 
                 if(_rootPath){
                     this.byId("idImage").setSrc(_rootPath + `/image/${oArgu.key}.png`)

@@ -8,16 +8,15 @@
                         <Label text="거래처코드" required="true"></Label>
                         <Input id="addCode"   placeholder="5자리" value="{ 'path' : 'Input>/Bpcode',
                         'constraints' : {
-                            minLength: 5,
                             maxLength: 5
-                        } }" type="Number" ></Input>
+                        } }" type="Number" liveChange="OnCodeChange"></Input>
                         <Label text="거래처명" required="true"></Label>
                         <HBox>
-                        <Input id="addName"  value="{Input>/Bpname}" placeholder="한글" width="95%"></Input> 
-                        <Input id="addNameENG"  value="{Bptxt>/Bpname}" placeholder="영문"  width="95%"></Input>
+                        <Input id="addName"  value="{Input>/Bpname}" placeholder="한글" width="95%" liveChange="OnNameChange"></Input> 
+                        <Input id="addNameENG"  value="{Bptxt>/Bpname}" placeholder="영문"  width="95%" liveChange="OnENameChange"></Input>
                         </HBox>
                         <Label text="사업자등록번호" required="true" ></Label>
-                        <Input id="addNum"  value="{Input>/Brnum}" placeholder="10자리"></Input>
+                        <Input id="addNum"  value="{Input>/Brnum}" ></Input>
                         <Label text="대표자명" required="true"></Label>
                         <Input id="addCEO" value="{Input>/Ceoname}"></Input>
                         <Label text="업종" required="true" ></Label>

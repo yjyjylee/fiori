@@ -18,7 +18,8 @@ sap.ui.define([
 		var STARTING_PROFILE = "10000000";
 
 		GraphController.prototype.onInit = function () {
-			this.getView().setModel(new JSONModel(),"FilterModel")
+			
+			this.getView().setModel(new JSONModel(),"FilterModel");
 			this._oModel = new JSONModel(sap.ui.require.toUrl("zezoui5r07test/graph.json"));
 			this._oModel.setDefaultBindingMode(sap.ui.model.BindingMode.OneWay);
 
@@ -30,7 +31,7 @@ sap.ui.define([
 
 		
 			this._setFilter();
-
+			
 			this._graph.attachEvent("beforeLayouting", function (oEvent) {
 				// nodes are not rendered yet (bOutput === false) so their invalidation triggers parent (graph) invalidation
 				// which results in multiple unnecessary loading
@@ -41,6 +42,98 @@ sap.ui.define([
 						sSupervisor;
 
 					oNode.removeAllActionButtons();
+					//추가
+					
+					//본부
+					
+					var oFilterModel = this.getView().getModel('FilterModel');
+					var oODataModel = this.getView().getModel('Employ');
+					oODataModel.read("/zezo_empdepSet", {
+							success: function(oReturn) {
+								debugger;
+								oFilterModel.setProperty("/emp", oReturn.results.length);
+							}.bind(this),
+							error: function() {
+								sap.m.MessageToast.show('에러 발생');
+							}
+						});
+
+					//본부
+					var oFilter = new sap.ui.model.Filter('Deptcode', 'EQ', 10000000);
+					var oFilterModel = this.getView().getModel('FilterModel');
+					var oODataModel = this.getView().getModel('Employ');
+					oODataModel.read("/zezo_empdepSet", {
+							filters: [oFilter],
+							success: function(oReturn) {
+								debugger;
+								oFilterModel.setProperty("/head", oReturn.results.length);
+							}.bind(this),
+							error: function() {
+								sap.m.MessageToast.show('에러 발생');
+							}
+						});
+					
+					//영업
+					var oFilter = new sap.ui.model.Filter('Deptcode', 'BT', 10001001 , 10001002);
+					var oFilterModel = this.getView().getModel('FilterModel');
+					var oODataModel = this.getView().getModel('Employ');
+					oODataModel.read("/zezo_empdepSet", {
+							filters: [oFilter],
+							success: function(oReturn) {
+								debugger;
+								oFilterModel.setProperty("/sales", oReturn.results.length);
+							}.bind(this),
+							error: function() {
+								sap.m.MessageToast.show('에러 발생');
+							}
+						});
+					
+					//구매
+					var oFilter = new sap.ui.model.Filter('Deptcode', 'BT', 10003001 , 10003002);
+					var oFilterModel = this.getView().getModel('FilterModel');
+					var oODataModel = this.getView().getModel('Employ');
+					oODataModel.read("/zezo_empdepSet", {
+							filters: [oFilter],
+							success: function(oReturn) {
+								debugger;
+								oFilterModel.setProperty("/buy", oReturn.results.length);
+							}.bind(this),
+							error: function() {
+								sap.m.MessageToast.show('에러 발생');
+							}
+						});
+
+					//회계재무
+					var oFilter = new sap.ui.model.Filter('Deptcode', 'EQ', 10004001);
+					var oFilterModel = this.getView().getModel('FilterModel');
+					var oODataModel = this.getView().getModel('Employ');
+					oODataModel.read("/zezo_empdepSet", {
+							filters: [oFilter],
+							success: function(oReturn) {
+								debugger;
+								oFilterModel.setProperty("/fico", oReturn.results.length);
+							}.bind(this),
+							error: function() {
+								sap.m.MessageToast.show('에러 발생');
+							}
+						});
+					
+					//생산
+					var oFilter = new sap.ui.model.Filter('Deptcode', 'EQ', 10002001);
+					var oFilterModel = this.getView().getModel('FilterModel');
+					var oODataModel = this.getView().getModel('Employ');
+					oODataModel.read("/zezo_empdepSet", {
+							filters: [oFilter],
+							success: function(oReturn) {
+								debugger;
+								oFilterModel.setProperty("/pro", oReturn.results.length);
+							}.bind(this),
+							error: function() {
+								sap.m.MessageToast.show('에러 발생');
+							}
+						});
+
+
 
 					//+, - 버튼
 					if (!sTeamSize) {
@@ -92,7 +185,7 @@ sap.ui.define([
 							}.bind(this)
 						});
 						oNode.addActionButton(oTableButton)
-
+						
 					}
 					// // if current user is root we can add 'up one level'
 					// if (oNode.getKey() === this._sTopSupervisor) {
@@ -146,12 +239,14 @@ sap.ui.define([
 			});
 
 			aFilteredItems.sort(function (oItem1, oItem2) {
+
 				var sTitle = oItem1.title ? oItem1.title : "";
 				return sTitle.localeCompare(oItem2.title);
 			}).forEach(function (oItem) {
+				// debugger;
 				aSuggestionItems.push(new sap.m.SuggestionItem({
 					key: oItem.id,
-					text: oItem.title
+					text: oItem.title 
 				}));
 			});
 

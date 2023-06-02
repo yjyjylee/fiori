@@ -1,0 +1,51 @@
+<c:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core" xmlns:t="sap.ui.table"
+>   
+<Dialog id="BpDialog" title="고객사"  draggable="true" resizable="true" contentWidth="30%">
+    <content>
+        <t:Table id="BpTable"
+				rows="{
+                        path: '/zezo_bpSet',
+                        filters : [ {
+                        path : 'Bpcode',
+                        operator : 'BT',
+                        value1: '10000',
+                        value2: '20000' }],
+                        sorter: [{
+                        path : 'Bpcode',
+                        descending : true
+                        }]
+                            }"
+				visibleRowCount="10"
+                selectionMode="Single"
+				ariaLabelledBy="title"
+                selectionBehavior="RowOnly"
+                rowSelectionChange="onRowSelectionChange"
+				>
+				<t:columns>
+					<t:Column >
+						<Label text="거래처코드" />  
+						<t:template>
+							<Text text="{Bpcode}" />
+						</t:template>
+					</t:Column>
+                    <t:Column >
+						<Label text="회사명" />  
+						<t:template>
+							<Text text="{Bpname}" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+    </content>
+
+    <endButton>
+        <!-- .은 현재 위치 라는 의미 -->
+        <Button text="닫기" press=".onClose"> 
+        </Button>
+    </endButton>
+</Dialog>
+
+
+</c:FragmentDefinition>

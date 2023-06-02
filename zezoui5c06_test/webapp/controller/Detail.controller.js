@@ -1,11 +1,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
+    "sap/m/MessageBox"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, JSONModel) {
+    function (Controller, JSONModel, MessageBox) {
         "use strict";
 
         return Controller.extend("zezoui5c06test.controller.Detail", {
@@ -44,7 +45,8 @@ sap.ui.define([
 
                 this.oModel.update(sFullPath, jsonData, {
                     success : function(rrr) {
-                        sap.m.MessageToast.show("거래상태가 변경되었습니다");
+                        MessageBox.success("거래상태가 변경되었습니다"
+                        );
                     }.bind(this)
                 });
                 

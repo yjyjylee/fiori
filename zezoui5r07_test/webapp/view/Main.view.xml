@@ -1,21 +1,22 @@
 <mvc:View controllerName="zezoui5r07test.controller.Main"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:m="sap.m"
+	xmlns:t="sap.ui.table"
+	xmlns:tnt="sap.tnt"
     xmlns="sap.suite.ui.commons.networkgraph"
 	xmlns:layout="sap.suite.ui.commons.networkgraph.layout"
     xmlns:core="sap.ui.core">
-    <m:Page id="page" title="Organization Chart" titleLevel="H1" >
+    <m:Page id="page" >
         <m:content>
-		<m:Text text="Organization Chart"></m:Text>
 		<Graph 
-		backgroundColor="White"
+			backgroundColor="White"
 		   orientation="TopBottom"
 		   nodes="{/nodes}"
 		   lines="{/lines}"
 		 	enableWheelZoom="false"
+		   id="graph"
 		   searchSuggest="suggest"
-		   search="search"
-		   id="graph">
+		   search="search">
 		<layoutAlgorithm>
 			<layout:LayeredLayout
 					mergeEdges="true"
@@ -28,13 +29,15 @@
 				  key="{id}"
 				  description="{description}"
 				  title="{title}"
-				  width="90"
+				  width="150"
+				  status="Success"
 				  collapsed="false"
 				  attributes="{attributes}"
 				  showActionLinksButton="false"
 				  showDetailButton="false"
 				  descriptionLineSize="0"
-				  shape="Box">
+				  shape="Box"
+				  >
 				
 				<customData>
 					<core:CustomData key="supervisor" value="{supervisor}"/>
@@ -61,35 +64,54 @@
 			<Line from="{from}" to="{to}" arrowOrientation="None" press="linePress" />
 		</lines>
 	</Graph>
-        <!-- <t:Table id="empTable"
-				rows="{Employ>/zezo_empdepSet}"
-				visibleRowCount="20"
-                selectionMode="Single"
-				paste="onPaste"
-				ariaLabelledBy="title"
-				rowSelectionChange="onRowSelectionChange">
-				<t:columns>
-					<t:Column >
-						<m:Label text="사번" />  
-						<t:template>
-							<m:Text text="{Employ>Pernr}" />
-						</t:template>
-					</t:Column>
-                    <t:Column >
-						<m:Label text="이름" />  
-						<t:template>
-							<m:Text text="{Employ>Name}" />
-						</t:template>
-					</t:Column>
-                       <t:Column >
-						<m:Label text="성별" />  
-						<t:template>
-							<m:Text text="{Employ>Gender}" />
-						</t:template>
-					</t:Column>
-				</t:columns>
-			</t:Table> -->
-    </m:content>
+	
 
+	<m:HBox >
+			<m:VBox width="10%"></m:VBox>
+			<m:VBox width="80%"  >
+			<tnt:InfoLabel id="il8" text="보유 인력" colorScheme="8" />
+			<!-- <m:Button text="보유 인력"></m:Button> -->
+			<!-- <m:Text text="보유인력" textAlign="Begin"></m:Text> -->
+			<m:Table   
+						id="emp2Table"
+						ariaLabelledBy="title"
+						>
+						<m:columns>
+							<m:Column>
+								<m:Text text="총계" />
+							</m:Column>
+							<m:Column>
+								<m:Text text="본부" />
+							</m:Column>
+							<m:Column>
+								<m:Text text="영업" />
+							</m:Column>
+							<m:Column>
+								<m:Text text="생산" />
+							</m:Column>
+							<m:Column>
+								<m:Text text="구매" />
+							</m:Column>
+							<m:Column>
+								<m:Text text="경영지원" />
+							</m:Column>
+						</m:columns>
+						<m:items>
+							<m:ColumnListItem>
+								<m:cells>
+									<m:Text text="{FilterModel>/emp}명" />
+									<m:Text text="{FilterModel>/head}명" />
+									<m:Text text="{FilterModel>/sales}명" />
+									<m:Text text="{FilterModel>/pro}명" />
+									<m:Text text="{FilterModel>/buy}명" />
+									<m:Text text="{FilterModel>/fico}명" />
+								</m:cells>
+							</m:ColumnListItem>
+						</m:items>
+					</m:Table>
+			</m:VBox>
+			<m:VBox width="10%"></m:VBox>
+		</m:HBox>
+		</m:content>
     </m:Page>
 </mvc:View>

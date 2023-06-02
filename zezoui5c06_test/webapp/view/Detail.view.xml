@@ -30,7 +30,7 @@ height="100%"
 								<m:FlexBox wrap="NoWrap" fitContainer="true" alignItems="Center" class="sapUiTinyMarginEnd">
                                     <m:VBox class="sapUiSmallMarginEnd">
 									<core:Icon 
-                                	src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" 
+                                	src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://cancel' : 'sap-icon://sys-enter'}" 
                                 	color="{=${DetailModel>/data/Delflag} === 'X' ? '#FF7171' : '#6BEC62'}" />
 									<!-- <m:Avatar src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" displaySize="S" 
                             		backgroundColor="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" displayShape="Square" /> -->
@@ -59,7 +59,7 @@ height="100%"
 					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
 						<m:VBox class="sapUiTinyMarginEnd"> 
 							<core:Icon 
-                                src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" 
+                                src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://cancel' : 'sap-icon://sys-enter'}" 
                                 color="{=${DetailModel>/data/Delflag} === 'X' ? '#FF7171' : '#6BEC62'}" />
                             <!-- <m:Avatar src="{=${DetailModel>/data/Delflag} === 'X' ? 'sap-icon://status-negative' : 'sap-icon://status-completed'}" displaySize="S" 
                             backgroundColor="{=${DetailModel>/data/Delflag} === 'X' ? 'Accent2' : 'Accent7'}" displayShape="Square" /> -->

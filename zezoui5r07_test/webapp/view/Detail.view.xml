@@ -4,7 +4,7 @@
     xmlns:core="sap.ui.core"
     xmlns:l="sap.ui.layout"
 	xmlns:u="sap.ui.unified">
-    <Page id="page" title="Detail" showNavButton="true" navButtonPress="onNavButtonPress">
+    <Page id="page" title="임직원 상세 정보" showNavButton="true" navButtonPress="onNavButtonPress">
         <!-- <content>
             <Input value="{DetailModel>/data/Pernr}"></Input>
             <Button text="test" press="onPress"></Button>
@@ -26,16 +26,16 @@
                 <VBox width="50%">
                     <Label text="사번" design="Bold"/>
                     <Input value="{DetailModel>/data/Pernr}" type="Number" editable="false" />
-                    <Label text="이름" />
+                    <Label text="이름" design="Bold"/>
                     <Input value="{DetailModel>/data/Name}" type="Text" editable="false" valueState="Error"/>
-                    <Label text="성별"/>
+                    <Label text="성별" design="Bold"/>
                     <ComboBox selectedKey="{DetailModel>/data/Gender}" editable="false">
                         <items>
                             <core:Item text="남" key="1"/>
                             <core:Item text="여" key="2"/>
                         </items>
                     </ComboBox>                    
-                    <Label text="부서" />
+                    <Label text="부서" design="Bold" />
                     <ComboBox id="idDeptSelection" selectedKey="{DetailModel>/data/Deptcode}" editable="false">
                         <items>
                             <core:Item text="본부" key="10000000"/>
@@ -47,7 +47,7 @@
                             <core:Item text="회계/재무팀" key="10004001"/>
                         </items>
                     </ComboBox>                     
-                    <Label text="직급" />
+                    <Label text="직급" design="Bold"/>
                     <ComboBox id="idRankSelection" selectedKey="{DetailModel>/data/Rank}" editable="false">
                         <items>
                             <core:Item text="CEO" key="CEO"/>
@@ -60,11 +60,11 @@
                             <core:Item text="인턴" key="인턴"/>
                         </items>
                     </ComboBox>                      
-                    <Label text="연락처"/>
+                    <Label text="연락처" design="Bold"/>
                     <Input value="{DetailModel>/data/Tel}" type="Tel" editable="false"/>
-                    <Label text="이메일"/>
+                    <Label text="이메일" design="Bold"/>
                     <Input value="{DetailModel>/data/Email}" type="Email" editable="false"/>
-                    <Label text="입사일" />
+                    <Label text="입사일" design="Bold"/>
                     <DatePicker
                         value="{
                             'path':'DetailModel>/data/Joindate',
@@ -74,7 +74,7 @@
                             }
                         }"
                         editable="false"/>
-                    <Label text="탄생" />
+                    <Label text="탄생" design="Bold"/>
                     <DatePicker
                         value="{
                             'path':'DetailModel>/data/Birthdate',
